@@ -24,7 +24,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.startCountdown();
+    this.startCompteur();
     setInterval(() => {
       // Change l'événement toutes les 30 secondes
       if (this.evenement === 'Olympiques') {
@@ -37,7 +37,7 @@ export class HomeComponent {
     }, 10000); 
   }
 
-  startCountdown(): void {
+  startCompteur(): void {
     const interval = setInterval(() => {
       const dateJour = new Date().getTime();
       const distance = this.dateEvent - dateJour;
