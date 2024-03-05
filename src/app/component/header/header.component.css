@@ -1,0 +1,41 @@
+.navbar {
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 50px, rgba(255, 255, 255, 0));
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.border-menu {
+    width: 25%;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.links a {
+    font-family: "Paris";
+    margin-left: 10px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+    transition: border-bottom 0.3s, transform 0.3s;
+    display: inline-block;
+}
+
+.links a:hover {
+    border-bottom: 2px solid black;
+    /* Changez la couleur selon votre thème */
+    transform: scale(1.1);
+    /* Applique un léger zoom */
+}

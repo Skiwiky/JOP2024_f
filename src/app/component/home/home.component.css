@@ -1,0 +1,28 @@
+.body-home {
+    height: 850px;
+    background-image: url(../../../assets/img/Paris2024-affiche1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    font-family: 'Paris';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chrono {
+    width: 25%;
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-family: "Paris";
+    font-size: 8em;
+    color: black;
+}
