@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthGuardService } from 'src/app/services/authGuard/auth-guard.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +13,11 @@ export class HeaderComponent {
   logoAffiche: string;
   evenement: string = 'Olympiques';
 
-  constructor() {
+  constructor(private loginService: LoginService) {
     this.logoAffiche = this.urlLogoJO;
   }
   ngOnInit(): void {
-    //this.startCompteur();
     setInterval(() => {
-      // Change l'événement toutes les 30 secondes
       if (this.evenement === 'Olympiques') {
         this.logoAffiche = this.urlLogoJP;
         this.evenement = 'Paralympiques';
@@ -26,6 +26,11 @@ export class HeaderComponent {
         this.evenement = 'Olympiques';
       }
     }, 10000); 
+  }
+
+
+  logout() {
+    this.loginService.logout();
   }
 
 }

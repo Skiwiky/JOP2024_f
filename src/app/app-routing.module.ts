@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { OffersComponent } from './component/offers/offers.component';
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
+import { ProfilComponent } from './component/profil/profil.component';
+import { AuthGuardService } from './services/authGuard/auth-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'boutique', component: OffersComponent },
   { path: 'connexion', component: LoginComponent },
+  { path: 'profil', component: ProfilComponent,canActivate: [AuthGuardService]},
 ];
 
 @NgModule({

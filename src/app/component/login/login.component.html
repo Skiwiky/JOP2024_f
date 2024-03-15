@@ -1,1 +1,23 @@
-<p>login works!</p>
+<app-header></app-header>
+<div *ngIf="isLoginFormVisible">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="signin()">
+        <input type="email" formControlName="email" placeholder="Email">
+        <input type="password" formControlName="password" placeholder="Password">
+        <button type="submit">Login</button>
+    </form>
+    <button (click)="toggleForm()">Sign up</button>
+</div>
+
+<div *ngIf="!isLoginFormVisible">
+    <h2>Sign up</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="signup()">
+        <input type="text" formControlName="newFirtName" placeholder="First Name">
+        <input type="text" formControlName="newLastName" placeholder="Last Name">
+        <input type="email" formControlName="newUsername" placeholder="Email">
+        <input type="password" formControlName="newPassword" placeholder="Password">
+        <input type="date" formControlName="newBirthDate" placeholder="Birth Date">
+        <button type="submit">Register</button>
+    </form>
+    <button (click)="toggleForm()">Back to login</button>
+</div>

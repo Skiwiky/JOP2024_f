@@ -26,7 +26,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.startCompteur();
     setInterval(() => {
-      // Change l'événement toutes les 30 secondes
+  
       if (this.evenement === 'Olympiques') {
         this.dateEvent = this.dateDebutJP;
         this.evenement = 'Paralympiques';
