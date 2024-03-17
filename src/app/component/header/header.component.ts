@@ -13,7 +13,7 @@ export class HeaderComponent {
   logoAffiche: string;
   evenement: string = 'Olympiques';
 
-  constructor(private loginService: LoginService) {
+  constructor(public loginService: LoginService) {
     this.logoAffiche = this.urlLogoJO;
   }
   ngOnInit(): void {

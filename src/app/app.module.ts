@@ -10,7 +10,8 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { LoginComponent } from './component/login/login.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './component/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfilComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule, 
     AppRoutingModule
   ],
   providers: [],

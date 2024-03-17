@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserCreation } from 'src/app/model/UserCreation';
+import { LoginRequest } from 'src/app/model/LoginRequest';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,8 @@ export class LoginComponent {
   signin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.loginService.signin(this.username, this.password)
+      const loginRequest= new LoginRequest(email, password);
+      this.loginService.signin(loginRequest)
         .subscribe(response => {
           // Gérer la réponse de connexion
           this.loginService.setToken(response.token);

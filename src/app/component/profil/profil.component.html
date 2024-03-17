@@ -1,1 +1,24 @@
-<p>profil works!</p>
+<div class="user-details">
+    <h2>Profil utilisateur</h2>
+    <div>
+        <label for="firstName">Prénom:</label>
+        <input type="text" id="firstName" [(ngModel)]="user.firstName">
+    </div>
+    <div>
+        <label for="lastName">Nom:</label>
+        <input type="text" id="lastName" [(ngModel)]="user.lastName">
+    </div>
+    <div>
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" [(ngModel)]="user.username">
+    </div>
+    <div>
+        <label for="birthDate">Date de naissance:</label>
+        <input type="date" id="birthDate" [(ngModel)]="user.birthDate">
+    </div>
+    <div>
+        <label for="favouriteSport">Sport favori:</label>
+        <input type="text" id="favouriteSport" [(ngModel)]="user.favouriteSport">
+    </div>
+    <button (click)="updateUser()">Enregistrer</button>
+</div>

@@ -2,11 +2,17 @@
     <div class="container">
         <div class="border-menu"></div>
         <div class="logo">
-            <img src="{{logoAffiche}}" alt="Logo">
+            <img src="{{ logoAffiche }}" alt="Logo">
         </div>
         <div class="links border-menu">
             <a routerLink="/boutique">Boutique</a>
-            <a routerLink="/connexion">Connexion</a>
+            <!-- Afficher le lien "Connexion" uniquement lorsque l'utilisateur n'est pas connecté -->
+            <a *ngIf="!loginService.isLoggedIn()" routerLink="/connexion">Connexion</a>
+            <!-- Afficher le menu déroulant lorsque l'utilisateur est connecté -->
+            <div class="dropdown" *ngIf="loginService.isLoggedIn()">
+                <a class="dropdown-item" routerLink="/profil">Profil</a>
+            </div>
         </div>
+
     </div>
 </nav>

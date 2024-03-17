@@ -5,13 +5,15 @@ import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProfilComponent } from './component/profil/profil.component';
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
+import { AdminComponent } from './component/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'boutique', component: OffersComponent },
   { path: 'connexion', component: LoginComponent },
-  { path: 'profil', component: ProfilComponent,canActivate: [AuthGuardService]},
+  { path: 'profil', component: ProfilComponent,canActivate: [AuthGuardService], data: { roles: ['USER', 'ADMIN'] }},
+  { path: 'admin', component:AdminComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] }},
 ];
 
 @NgModule({
