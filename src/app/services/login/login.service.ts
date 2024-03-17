@@ -20,8 +20,10 @@ export class LoginService {
     return this.http.post<any>(`${this.apiUrl}/signin`, loginRequest)
     .pipe(
       tap(response => {
+        console.log(response);
         this.setToken(response.token);
         this.setUser(response.user); 
+        console.log(this.user);
         this.isAuthenticated = true;
       })
     );;

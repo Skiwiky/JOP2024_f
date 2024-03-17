@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
 
     // Récupérer les rôles autorisés de la route
     const roles = route.data['roles'] as Array<string>;
-
+console.log(userRole + " -  " + roles);
     // Si des rôles sont spécifiés et que le rôle de l'utilisateur n'est pas inclus, rediriger
     if (roles && roles.indexOf(userRole) === -1) {
       this.router.navigate(['/home']);

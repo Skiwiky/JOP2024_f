@@ -18,7 +18,9 @@
     </div>
     <div>
         <label for="favouriteSport">Sport favori:</label>
-        <input type="text" id="favouriteSport" [(ngModel)]="user.favouriteSport">
+        <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
+            <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
+          </select>
     </div>
     <button (click)="updateUser()">Enregistrer</button>
 </div>
