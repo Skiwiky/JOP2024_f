@@ -30,10 +30,7 @@ export class LoginService {
   signup(user: UserCreation): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/signup`, user).pipe(
       tap(response => {
-        this.isAuthenticated = true;
-        this.setToken(response.token);
-        this.setUser(response.user); 
-        console.log(user);
+    console.log(response);
       })
     );
   }

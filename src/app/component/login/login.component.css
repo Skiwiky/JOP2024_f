@@ -1,0 +1,64 @@
+/* Styles globaux dans styles.css ou locaux dans profil.component.css */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    /* Ajustez selon vos besoins */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+input,
+button {
+    margin: 10px 0;
+}
+
+.btn-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btnAction {
+    width: 60%;
+}
+
+label {
+    margin-top: 20px;
+}
+
+
+/* Classe de base pour l'alerte, centrée horizontalement */
+
+.alert {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.alert-success,
+.alert-danger {
+    margin: 0 auto;
+    /* Centrage horizontal */
+    width: 50%;
+    /* Ajustez selon la largeur désirée */
+    display: block;
+    /* Assurez-vous que l'alerte est traitée comme un bloc pour appliquer la marge */
+}
+
+
+/* Assurez-vous que vos alertes ne sont pas trop larges sur les petits écrans */
+
+@media (max-width: 600px) {
+    .alert-success,
+    .alert-danger {
+        width: 90%;
+        /* Plus large sur les petits écrans pour une meilleure lisibilité */
+    }
+}

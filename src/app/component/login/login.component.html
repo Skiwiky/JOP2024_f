@@ -1,23 +1,70 @@
 <app-header></app-header>
-<div *ngIf="isLoginFormVisible">
-    <h2>Login</h2>
+<div *ngIf="showAlert" class="alert" [class]="alertType === 'success' ? 'alert-success' : 'alert-danger'" role="alert">
+    {{ alertMessage }}
+</div>
+<div *ngIf="isLoginFormVisible" class="form-container">
+    <h2>Se connecter</h2>
     <form [formGroup]="loginForm" (ngSubmit)="signin()">
+        <label for="email">Email</label>
         <input type="email" formControlName="email" placeholder="Email">
-        <input type="password" formControlName="password" placeholder="Password">
-        <button type="submit">Login</button>
+        <label for="password">Mot de passe</label>
+        <input type="password" formControlName="password" placeholder="Mot de passe">
+        <div class="btn-container">
+            <button type="submit" class="btnAction btn btn-primary">Se connecter</button>
+        </div>
     </form>
-    <button (click)="toggleForm()">Sign up</button>
+    <button (click)="toggleForm()" class="btn btn-light">Pas encore de compte</button>
 </div>
 
-<div *ngIf="!isLoginFormVisible">
-    <h2>Sign up</h2>
+<div *ngIf="!isLoginFormVisible" class="form-container">
+    <h2>S'inscrire</h2>
     <form [formGroup]="registerForm" (ngSubmit)="signup()">
-        <input type="text" formControlName="newFirtName" placeholder="First Name">
-        <input type="text" formControlName="newLastName" placeholder="Last Name">
-        <input type="email" formControlName="newUsername" placeholder="Email">
-        <input type="password" formControlName="newPassword" placeholder="Password">
-        <input type="date" formControlName="newBirthDate" placeholder="Birth Date">
-        <button type="submit">Register</button>
+        <div>
+            <label for="newFirstName">Prénom</label>
+            <input type="text" formControlName="newFirstName" placeholder="Prénom">
+            <div *ngIf="registerForm.get('newFirstName')?.touched && registerForm.get('newFirstName')?.hasError('required')">
+                Le prénom est requis.
+            </div>
+        </div>
+        <div>
+            <label for="newLastName">Nom</label>
+            <input type="text" formControlName="newLastName" placeholder="Nom">
+            <div *ngIf="registerForm.get('newLastName')?.touched && registerForm.get('newLastName')?.hasError('required')">
+                Le nom est requis.
+            </div>
+        </div>
+        <div>
+            <label for="newUsername">Email</label>
+            <input type="email" formControlName="newUsername" placeholder="Email">
+            <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['required']">
+                Email est requis.
+            </div>
+            <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['email']">
+                Format d'email invalide.
+            </div>
+        </div>
+        <div>
+            <label for="newPassword">Mot de passe</label>
+            <input type="password" formControlName="newPassword" placeholder="Mot de passe">
+            <div *ngIf="registerForm.get('password')?.touched && registerForm.get('newPassword')?.errors?.['required']">
+                Mot de passe est requis.
+            </div>
+            <div *ngIf="registerForm.get('password')?.dirty && registerForm.get('newPassword')?.errors?.['minLength']">
+                Le mot de passe doit comporter au moins 6 caractères.
+            </div>
+        </div>
+        <div>
+            <label for="newBirthDate">Date de  naissance</label>
+            <input type="date" formControlName="newBirthDate" placeholder="Date de naissance">
+            <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['required']">
+                Date de naissance est requise.
+            </div>
+            <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['minAge']">
+                Vous devez avoir au moins 18 ans.
+            </div>
+        </div>
+        <div class="btn-container"><button type="submit" class="btnAction btn btn-primary">Register</button></div>
+
     </form>
-    <button (click)="toggleForm()">Back to login</button>
+    <button (click)="toggleForm()" class="btn btn-light">J'ai un compte</button>
 </div>
