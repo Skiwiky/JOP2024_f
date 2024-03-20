@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,8 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './component/admin/admin.component';
+import { AuthInterceptor } from './interceptor/error/auth.interceptor';
+import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfresh.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AdminComponent } from './component/admin/admin.component';
     FormsModule, 
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: TokenResfreshInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

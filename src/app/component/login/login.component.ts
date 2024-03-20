@@ -3,6 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserCreation } from 'src/app/model/UserCreation';
 import { LoginRequest } from 'src/app/model/LoginRequest';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +21,8 @@ export class LoginComponent {
   newLastName: string;
   newBirthDate: Date;
 
+  private user: User = new User;
+  
   loginForm: FormGroup;
   registerForm: FormGroup;
   isLoginFormVisible: boolean = true;
@@ -26,7 +31,11 @@ export class LoginComponent {
   alertMessage: string = '';
   alertType: string = 'success';
 
-  constructor(private fb: FormBuilder,private loginService: LoginService) {
+  constructor(private fb: FormBuilder,
+    private loginService: LoginService, 
+    private router:Router,
+    private storageService: StorageService) {
+
     this.username = '';
     this.password = '';
     this.newUsername = '';
@@ -54,9 +63,18 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       const loginRequest= new LoginRequest(email, password);
       this.loginService.signin(loginRequest)
-        .subscribe(response => {
-          // Gérer la réponse de connexion
-          this.loginService.setToken(response.token);
+        .subscribe({
+          next: (response) => {
+            console.log('Connexion réussie', response);
+            /*this.storageService.setItem('authToken', response.token);
+            this.storageService.setItem('user', JSON.stringify(response.user));
+            this.storageService.setItem('idUser', response.user.id);*/
+            this.router.navigate(['/profil']); 
+          },
+          error: (error) => {
+            console.error('Erreur lors de la connexion', error);
+            
+          }
           
         });
     }
@@ -86,7 +104,6 @@ export class LoginComponent {
           this.alertMessage = 'Erreur lors de la création du compte. Veuillez réessayer.';
           this.alertType = 'danger';
           this.showAlert = true;
-          // Reste sur le formulaire de création de compte
           this.isLoginFormVisible = false;
         }
       });

@@ -10,19 +10,22 @@ export class AuthGuardService implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-     // Vérifiez si l'utilisateur est connecté
-    if (!this.loginService.isLoggedIn()) {
+    /*if (!this.loginService.isLoggedIn()) {
       this.router.navigate(['/connexion']);
+      return false;
+    }*/
+
+    if (this.loginService.checkSession()) {
+      return true;
+    } else {
+      this.router.navigate(['/connexion']); 
       return false;
     }
 
-    // Récupérer le rôle de l'utilisateur
     const userRole = this.loginService.getUserRole();
-
-    // Récupérer les rôles autorisés de la route
     const roles = route.data['roles'] as Array<string>;
-console.log(userRole + " -  " + roles);
-    // Si des rôles sont spécifiés et que le rôle de l'utilisateur n'est pas inclus, rediriger
+
+    // controle des roles avec les roles des routes
     if (roles && roles.indexOf(userRole) === -1) {
       this.router.navigate(['/home']);
       return false;

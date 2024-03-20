@@ -1,3 +1,23 @@
+<div *ngIf="showAlert" class="alert alert-danger" role="alert">
+    {{ alertMessage }}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true" *ngIf="showAlert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginAlertModalLabel">Attention</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ alertMessage }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="redirectToLogin()">Se connecter</button>>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="user-details">
     <h2>Profil utilisateur</h2>
     <div>
@@ -13,8 +33,7 @@
         <input type="text" id="username" [(ngModel)]="user.username">
     </div>
     <div>
-        <label for="birthDate">Date de naissance:</label>
-        <input type="date" id="birthDate" [(ngModel)]="user.birthDate">
+        <label for="birthDate">Date de naissance: {{user.birthDate }}</label>
     </div>
     <div>
         <label for="favouriteSport">Sport favori:</label>

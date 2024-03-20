@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/User';
 import { LoginService } from '../login/login.service';
 import { Observable } from 'rxjs';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService {
     })
   };
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient, private loginService: LoginService, private storageService: StorageService) { }
 
 
   // Obtenir tous les utilisateurs
@@ -31,9 +32,13 @@ export class UserService {
   }
 
   // Mettre à jour un utilisateur
-  updateUser(userId: number, userDetails: User): Observable<HttpEvent<User>> {
+  updateUser(userId: number, userDetails: User): Observable<User> {
     const url = `${this.apiUrl}/${userId}`;
-    return this.http.put<User>(url, userDetails, this.getAuthHeaders());
+    //return this.http.put<User>(url, userDetails, this.getAuthHeaders());
+    return this.http.put<User>(url, userDetails, { 
+      headers: this.getAuthHeaders(),
+      observe: 'body' // retourne juste le User
+    });
   }
 
   // Supprimer un utilisateur
@@ -49,7 +54,7 @@ export class UserService {
 
   // Obtenir les en-têtes d'authentification
   private getAuthHeaders(): any {
-    const token = this.loginService.getToken();
+    const token = this.storageService.getItem('authToken');
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
