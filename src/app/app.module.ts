@@ -35,7 +35,8 @@ import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfr
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: HTTP_INTERCEPTORS, useClass: TokenResfreshInterceptor, multi: true},],
+   // {provide: HTTP_INTERCEPTORS, useClass: TokenResfreshInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

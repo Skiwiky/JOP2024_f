@@ -84,12 +84,14 @@ export class LoginService {
 
   // Méthode pour vérifier si le token expire bientôt
   isTokenExpiringSoon(token: string): Observable<boolean> {
+    console.log("token expire soon?");
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<boolean>(`${this.apiUrl}/isTokenExpiringSoon`, { headers });
   }
 
   // Méthode pour renouveler le token
   refreshToken(token: string): Observable<string> {
+    console.log("refresh Token");
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<string>(`${this.apiUrl}/refreshToken`, {}, { headers });
   }
