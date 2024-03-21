@@ -1,0 +1,31 @@
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 100%;
+    /* Utilise toute la largeur disponible */
+    padding: 10px;
+    /* Marge intérieure pour le confort de saisie */
+    margin: 10px 0;
+    /* Espacement entre les champs */
+    box-sizing: border-box;
+    /* S'assurer que padding et border sont inclus dans la largeur */
+    border: 1px solid #ccc;
+    /* Bordure subtile */
+    border-radius: 5px;
+    /* Bordures légèrement arrondies */
+    outline: none;
+    /* Supprime l'outline par défaut au focus */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #6658d3;
+    /* Change la couleur de la bordure au focus, choisissez la couleur que vous préférez */
+    box-shadow: 0 0 5px rgba(102, 88, 211, 0.5);
+    /* Ajoute une légère ombre autour du champ au focus */
+}

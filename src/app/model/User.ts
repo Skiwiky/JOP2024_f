@@ -12,9 +12,9 @@ export class User {
   birthDate: Date;
   favouriteSport: string;
   wallet: Billet[];
-  adressFacturation: Adress;
+  adressFacturation: Adress | null;
   adressSending: Adress;
-  dataBank: DataBank;
+  dataBank: DataBank | null;
 
   constructor(
     id?: number,

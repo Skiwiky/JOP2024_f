@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SPORTS_LIST } from 'src/app/Data/SPORTS_LIST';
+import { Adress } from 'src/app/model/Adress';
+import { DataBank } from 'src/app/model/DataBank';
 import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login/login.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -17,6 +19,7 @@ export class ProfilComponent {
   user: User = new User();
   listSport = SPORTS_LIST;
 
+  isModified: boolean = false;
   showAlert: boolean = false;
   alertMessage: string = '';
 
@@ -24,6 +27,8 @@ export class ProfilComponent {
     private loginService: LoginService, 
     private router: Router,
     private storageService: StorageService) {}
+
+    
 
   ngOnInit() {
     this.loadUserDetails();
@@ -59,7 +64,29 @@ export class ProfilComponent {
     });
   }
 
-  
+  addAdressFacturation() {
+      if (!this.user.adressFacturation) {
+          this.user.adressFacturation = new Adress();
+      }
+  }
+
+  deleteAdressFacturation() {
+      this.user.adressFacturation = null;
+  }
+
+  addDataBank() {
+      if (!this.user.dataBank) {
+          this.user.dataBank = new DataBank();
+      }
+  }
+
+  deleteDataBank() {
+      this.user.dataBank = null;
+  }
+
+  onFieldChange() {
+    this.isModified = true;
+}
   
 
   

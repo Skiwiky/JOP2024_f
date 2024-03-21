@@ -1,46 +1,110 @@
-<div *ngIf="showAlert" class="alert alert-danger" role="alert">
-    {{ alertMessage }}
-</div>
-<!-- Modal -->
-<div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true" *ngIf="showAlert">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginAlertModalLabel">Attention</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {{ alertMessage }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="redirectToLogin()">Se connecter</button>>
+<div class="body-profil">
+    <app-header></app-header>
+
+    <div *ngIf="showAlert" class="alert alert-danger" role="alert">
+        {{ alertMessage }}
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true" *ngIf="showAlert">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginAlertModalLabel">Attention</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ alertMessage }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="redirectToLogin()">Se connecter</button>>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div>
+        <div class="user bloc-partie">
 
-<div class="user-details">
-    <h2>Profil utilisateur</h2>
-    <div>
-        <label for="firstName">Prénom:</label>
-        <input type="text" id="firstName" [(ngModel)]="user.firstName">
+            <div class="user-header">
+                <h2>Profil utilisateur</h2>
+                <button [disabled]="!isModified" (click)="updateUser()" class="btn btn-success">Enregistrer</button>
+            </div>
+
+            <div>
+                <label for="firstName">Prénom:</label>
+                <input type="text" id="firstName" [(ngModel)]="user.firstName">
+            </div>
+            <div>
+                <label for="lastName">Nom:</label>
+                <input type="text" id="lastName" [(ngModel)]="user.lastName">
+            </div>
+            <div>
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" [(ngModel)]="user.username">
+            </div>
+            <div>
+                <label for="birthDate">Date de naissance: {{user.birthDate }}</label>
+            </div>
+            <div>
+                <label for="favouriteSport">Sport favori:</label>
+                <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
+                <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
+              </select>
+            </div>
+        </div>
+
+
+        <!-- Adresse de facturation -->
+        <div class="bloc-partie">
+            <div class="title-container">
+                <h3>Adresse de facturation</h3>
+                <div>
+                    <button *ngIf="!user.adressFacturation" (click)="addAdressFacturation()" class="btn btn-primary">
+                        <span class="material-symbols-outlined">add</span> Adresse de Facturation
+                    </button>
+                </div>
+                <div *ngIf="user.adressFacturation" class="btn btn-danger" (click)="deleteAdressFacturation()">
+                    <span class="material-symbols-outlined">delete</span>
+                </div>
+            </div>
+            <div *ngIf="user.adressFacturation">
+                <input type="text" [(ngModel)]="user.adressFacturation.street" placeholder="Rue">
+                <input type="text" [(ngModel)]="user.adressFacturation.complement" placeholder="Complément">
+            </div>
+
+
+        </div>
+        <div class="bloc-partie">
+            <div class="title-container">
+                <h3><span class="material-symbols-outlined">account_balance</span> Données bancaires</h3>
+                <div>
+                    <button *ngIf="!user.dataBank" (click)="addDataBank()" class="btn btn-primary">
+                        <span class="material-symbols-outlined">add</span>  Données Bancaires
+                    </button>
+                    <div *ngIf="user.dataBank" class="btn btn-danger" (click)="deleteDataBank()">
+                        <span class="material-symbols-outlined">delete</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="user.dataBank">
+                <label for="numeroCarte" class="form-label">Numero de carte</label>
+                <input type="text" id="numeroCarte" [(ngModel)]="user.dataBank.numberCard" placeholder="XXXX XXXX XXXX XXXX">
+                <label for="dateCarte" class="form-label">Date</label>
+                <input type="text" id="dateCarte" [(ngModel)]="user.dataBank.dateClosed" placeholder="10/24">
+                <label for="cleCarte" class="form-label">Date</label>
+                <input type="text" id="cleCarte" [(ngModel)]="user.dataBank.keyCard" placeholder="XXX">
+            </div>
+        </div>
+
+        <div class="bloc-partie">
+            <h3>Vos billets</h3>
+            <hr>
+            <div *ngIf="user.wallet && user.wallet.length> 0">
+                <!-- Affichage de la liste des billets -->
+                <div *ngFor="let billet of user.wallet">
+                    <input type="text" [(ngModel)]="billet.sport" placeholder="Sport">
+                    <!-- Ajoutez les autres champs ici -->
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="lastName">Nom:</label>
-        <input type="text" id="lastName" [(ngModel)]="user.lastName">
-    </div>
-    <div>
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" [(ngModel)]="user.username">
-    </div>
-    <div>
-        <label for="birthDate">Date de naissance: {{user.birthDate }}</label>
-    </div>
-    <div>
-        <label for="favouriteSport">Sport favori:</label>
-        <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
-            <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
-          </select>
-    </div>
-    <button (click)="updateUser()">Enregistrer</button>
 </div>

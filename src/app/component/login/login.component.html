@@ -5,9 +5,9 @@
 <div *ngIf="isLoginFormVisible" class="form-container">
     <h2>Se connecter</h2>
     <form [formGroup]="loginForm" (ngSubmit)="signin()">
-        <label for="email">Email</label>
+        <label for="email" class="form-label">Email</label>
         <input type="email" formControlName="email" placeholder="Email">
-        <label for="password">Mot de passe</label>
+        <label for="password" class="form-label">Mot de passe</label>
         <input type="password" formControlName="password" placeholder="Mot de passe">
         <div class="btn-container">
             <button type="submit" class="btnAction btn btn-primary">Se connecter</button>
