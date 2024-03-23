@@ -21,20 +21,24 @@ export class UserService {
 
 
   // Obtenir tous les utilisateurs
-  getAllUsers(): Observable<HttpEvent<User[]>> {
-    return this.http.get<User[]>(this.apiUrl, this.getAuthHeaders());
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
+  
 
   // Obtenir un utilisateur par ID
   getUserById(userId: number): Observable<HttpEvent<User>> {
     const url = `${this.apiUrl}/${userId}`;
-    return this.http.get<User>(url, this.getAuthHeaders());
+    return this.http.get<User>(url, { 
+      headers: this.getAuthHeaders(),
+      observe: 'response'
+    });
   }
 
   // Mettre à jour un utilisateur
   updateUser(userId: number, userUpdated: User): Observable<User> {
     const url = `${this.apiUrl}/${userId}`;
-    return this.http.put<User>(url, userUpdated, this.getAuthHeaders());
+    return this.http.put<User>(url, userUpdated, { headers: this.getAuthHeaders() });
     /*return this.http.put<User>(url, userDetails, { 
       headers: this.getAuthHeaders(),
       observe: 'body' // retourne juste le User
@@ -44,7 +48,7 @@ export class UserService {
   // Supprimer un utilisateur
   deleteUser(userId: number): Observable<any> {
     const url = `${this.apiUrl}/${userId}`;
-    return this.http.delete(url, this.getAuthHeaders());
+    return this.http.delete(url,  { headers: this.getAuthHeaders() });
   }
 
   getUserDetails(): User {
@@ -55,10 +59,9 @@ export class UserService {
   // Obtenir les en-têtes d'authentification
   private getAuthHeaders(): HttpHeaders  {
     const token = this.storageService.getItem('authToken');
-    return new HttpHeaders({
+    return  new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      })
-    ;
+      });
   }
 }
