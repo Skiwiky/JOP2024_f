@@ -1,0 +1,19 @@
+<div class="title-container">
+    <h3><span class="material-symbols-outlined">account_balance</span> Données bancaires</h3>
+    <div>
+        <button *ngIf="!dataBank" (click)="addDatasBank()" class="btn btn-primary">
+            <span class="material-symbols-outlined">add</span>  Données Bancaires
+        </button>
+        <div *ngIf="dataBank" class="btn btn-danger" (click)="deleteDatasBank()">
+            <span class="material-symbols-outlined">delete</span>
+        </div>
+    </div>
+</div>
+<div *ngIf="dataBank">
+    <label for="numeroCarte" class="form-label">Numero de carte</label>
+    <input type="text" id="numeroCarte" name="numberCard" [(ngModel)]="dataBank.numberCard" placeholder="XXXX XXXX XXXX XXXX">
+    <label for="dateCarte" class="form-label">Date</label>
+    <input type="text" id="dateCarte" name="dateClosed" [(ngModel)]="dataBank.dateClosed" placeholder="10/24">
+    <label for="cleCarte" class="form-label">Code de sécurité</label>
+    <input type="text" id="cleCarte" name="keyCard" [(ngModel)]="dataBank.keyCard" placeholder="XXX">
+</div>

@@ -23,12 +23,11 @@ export class ProfilComponent {
   showAlert: boolean = false;
   alertMessage: string = '';
 
-  constructor(private userService: UserService, 
+  constructor(
+    private userService: UserService, 
     private loginService: LoginService, 
     private router: Router,
     private storageService: StorageService) {}
-
-    
 
   ngOnInit() {
     this.loadUserDetails();
@@ -51,15 +50,21 @@ export class ProfilComponent {
       this.redirectToLogin();
       return;
     }
-    const userId = this.storageService.getItem('idUser');
+    const userId = Number(this.storageService.getItem('idUser'));
+    
+    console.log("Update user: " + this.user);
     this.userService.updateUser(userId, this.user).subscribe({
       next: (response) => {
         this.showAlert = false; 
         this.updateFrontWithNewUserData(response); 
       },
       error: (error) => {
-        this.showAlert = true; 
+        this.showAlert = true;
+    if (error.status === 404) {
+        this.alertMessage = 'Utilisateur non trouvé.';
+    } else {
         this.alertMessage = 'Une erreur est survenue lors de la mise à jour du profil.';
+    }
       }
     });
   }

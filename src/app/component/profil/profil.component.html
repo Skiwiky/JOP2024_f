@@ -26,20 +26,20 @@
 
             <div class="user-header">
                 <h2>Profil utilisateur</h2>
-                <button [disabled]="!isModified" (click)="updateUser()" class="btn btn-success">Enregistrer</button>
+                <button (click)="updateUser()" class="btn btn-success">Enregistrer</button>
             </div>
 
             <div>
                 <label for="firstName">Prénom:</label>
-                <input type="text" id="firstName" [(ngModel)]="user.firstName">
+                <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
             </div>
             <div>
                 <label for="lastName">Nom:</label>
-                <input type="text" id="lastName" [(ngModel)]="user.lastName">
+                <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
             </div>
             <div>
                 <label for="username">Nom d'utilisateur:</label>
-                <input type="text" id="username" [(ngModel)]="user.username">
+                <input type="text" id="username" name="username" [(ngModel)]="user.username">
             </div>
             <div>
                 <label for="birthDate">Date de naissance: {{user.birthDate }}</label>
@@ -55,44 +55,10 @@
 
         <!-- Adresse de facturation -->
         <div class="bloc-partie">
-            <div class="title-container">
-                <h3>Adresse de facturation</h3>
-                <div>
-                    <button *ngIf="!user.adressFacturation" (click)="addAdressFacturation()" class="btn btn-primary">
-                        <span class="material-symbols-outlined">add</span> Adresse de Facturation
-                    </button>
-                </div>
-                <div *ngIf="user.adressFacturation" class="btn btn-danger" (click)="deleteAdressFacturation()">
-                    <span class="material-symbols-outlined">delete</span>
-                </div>
-            </div>
-            <div *ngIf="user.adressFacturation">
-                <input type="text" [(ngModel)]="user.adressFacturation.street" placeholder="Rue">
-                <input type="text" [(ngModel)]="user.adressFacturation.complement" placeholder="Complément">
-            </div>
-
-
+            <app-address-bloc [adressFacturation]="user.adressFacturation" (addAdress)="addAdressFacturation()" (deleteAdress)="deleteAdressFacturation()"></app-address-bloc>
         </div>
         <div class="bloc-partie">
-            <div class="title-container">
-                <h3><span class="material-symbols-outlined">account_balance</span> Données bancaires</h3>
-                <div>
-                    <button *ngIf="!user.dataBank" (click)="addDataBank()" class="btn btn-primary">
-                        <span class="material-symbols-outlined">add</span>  Données Bancaires
-                    </button>
-                    <div *ngIf="user.dataBank" class="btn btn-danger" (click)="deleteDataBank()">
-                        <span class="material-symbols-outlined">delete</span>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="user.dataBank">
-                <label for="numeroCarte" class="form-label">Numero de carte</label>
-                <input type="text" id="numeroCarte" [(ngModel)]="user.dataBank.numberCard" placeholder="XXXX XXXX XXXX XXXX">
-                <label for="dateCarte" class="form-label">Date</label>
-                <input type="text" id="dateCarte" [(ngModel)]="user.dataBank.dateClosed" placeholder="10/24">
-                <label for="cleCarte" class="form-label">Date</label>
-                <input type="text" id="cleCarte" [(ngModel)]="user.dataBank.keyCard" placeholder="XXX">
-            </div>
+            <app-bank-bloc [dataBank]="user.dataBank" (addDataBank)="addDataBank()" (deleteDataBank)="deleteDataBank()"> </app-bank-bloc>
         </div>
 
         <div class="bloc-partie">

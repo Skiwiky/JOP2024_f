@@ -32,13 +32,13 @@ export class UserService {
   }
 
   // Mettre à jour un utilisateur
-  updateUser(userId: number, userDetails: User): Observable<User> {
+  updateUser(userId: number, userUpdated: User): Observable<User> {
     const url = `${this.apiUrl}/${userId}`;
-    //return this.http.put<User>(url, userDetails, this.getAuthHeaders());
-    return this.http.put<User>(url, userDetails, { 
+    return this.http.put<User>(url, userUpdated, this.getAuthHeaders());
+    /*return this.http.put<User>(url, userDetails, { 
       headers: this.getAuthHeaders(),
       observe: 'body' // retourne juste le User
-    });
+    });*/
   }
 
   // Supprimer un utilisateur
@@ -53,13 +53,12 @@ export class UserService {
   }
 
   // Obtenir les en-têtes d'authentification
-  private getAuthHeaders(): any {
+  private getAuthHeaders(): HttpHeaders  {
     const token = this.storageService.getItem('authToken');
-    return {
-      headers: new HttpHeaders({
+    return new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       })
-    };
+    ;
   }
 }

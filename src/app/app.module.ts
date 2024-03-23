@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './component/admin/admin.component';
 import { AuthInterceptor } from './interceptor/error/auth.interceptor';
 import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfresh.interceptor';
+import { AddressBlocComponent } from './component/profil/address-bloc/address-bloc.component';
+import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfr
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    AddressBlocComponent,
+    BankBlocComponent
   ],
   imports: [
     BrowserModule,
