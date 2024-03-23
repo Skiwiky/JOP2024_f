@@ -51,6 +51,12 @@ export class ProfilComponent {
       return;
     }
     const userId = Number(this.storageService.getItem('idUser'));
+    if (this.user.adressFacturation) {
+      this.user.adressFacturation.userId = this.user.id;
+    }
+    if (this.user.dataBank) {
+      this.user.dataBank.userId = this.user.id;
+    }
     
     console.log("Update user: " + this.user);
     this.userService.updateUser(userId, this.user).subscribe({
