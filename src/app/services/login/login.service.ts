@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { UserCreation } from 'src/app/model/UserCreation';
 import { User } from 'src/app/model/User';
 import { LoginRequest } from 'src/app/model/LoginRequest';
@@ -20,20 +20,32 @@ export class LoginService {
   constructor(private http: HttpClient,private storageService: StorageService, private router:Router) { }
   
   signin(loginRequest: LoginRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/signin`, loginRequest)
-    .pipe(
+    return this.http.post<any>(`${this.apiUrl}/signin`, loginRequest).pipe(
       tap(response => {
-        console.log(response);
-        this.storageService.setItem('authToken', response.token);
-        this.setUser(response.user);
-        this.storageService.setItem('user', JSON.stringify(this.getUser()));
-        console.log('affichage user', JSON.parse(this.storageService.getItem('user')));
-        this.storageService.setItem('idUser', this.getUser().id);
-        console.log('affichage id', JSON.parse(this.storageService.getItem('idUser')));
-        this.isAuthenticated = true;
-        this.router.navigate(['/home'])
+          if (response && response.token && response.user) {
+              console.log(response);
+
+              this.storageService.setItem('authToken', response.token);
+              this.storageService.setItem('user', JSON.stringify(response.user)); 
+              if (response.user.id) {
+                  this.storageService.setItem('idUser', response.user.id.toString()); 
+              }
+              const storedUser = this.storageService.getItem('user');
+              if (storedUser) {
+                  console.log('affichage user', JSON.parse(storedUser)); 
+              }
+
+              this.isAuthenticated = true;
+              this.router.navigate(['/home']);
+          } else {
+              console.error('La réponse de connexion ne contient pas les données attendues.');
+          }
+      }),
+      catchError((error) => {
+          console.error('Erreur lors de la connexion', error);
+          return throwError(() => new Error('Une erreur est survenue lors de la tentative de connexion.'));
       })
-    );;
+  );
   }
 
   signup(user: UserCreation): Observable<any> {

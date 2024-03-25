@@ -1,6 +1,5 @@
 export class DataBank {
     id: number;
-    userId?: number; 
     dataSaved: boolean;
     nameCard: string;
     numberCard: string;
@@ -14,10 +13,8 @@ export class DataBank {
       numberCard?: string,
       keyCard?: string,
       dateClosed?: string,
-      userId?: number
     ) {
       this.id = id || 0;
-      this.userId = userId || 0;
       this.dataSaved = dataSaved || false;
       this.nameCard = nameCard || '';
       this.numberCard = numberCard || '';

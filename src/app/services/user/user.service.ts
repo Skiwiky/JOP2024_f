@@ -10,7 +10,7 @@ import { StorageService } from '../storage/storage.service';
 })
 export class UserService {
   
-  private apiUrl = 'http://localhost:8080/users/v1'; // Votre URL d'API Java
+  private apiUrl = 'http://localhost:8080/users/v1';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -39,10 +39,6 @@ export class UserService {
   updateUser(userId: number, userUpdated: User): Observable<User> {
     const url = `${this.apiUrl}/${userId}`;
     return this.http.put<User>(url, userUpdated, { headers: this.getAuthHeaders() });
-    /*return this.http.put<User>(url, userDetails, { 
-      headers: this.getAuthHeaders(),
-      observe: 'body' // retourne juste le User
-    });*/
   }
 
   // Supprimer un utilisateur

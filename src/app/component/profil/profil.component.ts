@@ -37,7 +37,7 @@ export class ProfilComponent {
    this.storageService.toString();
     const storedUserData = JSON.parse(this.storageService.getItem('user'));
     if (storedUserData) {
-      this.user =storedUserData;
+      this.user = storedUserData;
     } else {
       this.redirectToLogin();
       console.log('Aucune donnée utilisateur stockée trouvée. Veuillez vous connecter.');
@@ -50,15 +50,9 @@ export class ProfilComponent {
       this.redirectToLogin();
       return;
     }
-    const userId = Number(this.storageService.getItem('idUser'));
-    if (this.user.adressFacturation) {
-      this.user.adressFacturation.userId = this.user.id;
-    }
-    if (this.user.dataBank) {
-      this.user.dataBank.userId = this.user.id;
-    }
     
     console.log("Update user: " + this.user);
+    const userId = Number(this.storageService.getItem('idUser'));
     this.userService.updateUser(userId, this.user).subscribe({
       next: (response) => {
         this.showAlert = false; 

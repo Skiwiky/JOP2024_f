@@ -72,8 +72,7 @@ export class LoginComponent {
             this.router.navigate(['/profil']); 
           },
           error: (error) => {
-            console.error('Erreur lors de la connexion', error);
-            
+            console.error('Erreur lors de la connexion', JSON.stringify(error));
           }
           
         });
