@@ -1,1 +1,23 @@
-<p>admin works!</p>
+<app-header></app-header>
+<div>
+    <form [formGroup]="billetForm" (ngSubmit)="addBillet()">
+        <input formControlName="sport" placeholder="Sport" />
+        <input formControlName="localisation" placeholder="Localisation" />
+        <input type="date" formControlName="dateEvent" placeholder="Date de l'événement" />
+        <input formControlName="category" placeholder="Catégorie" />
+        <select formControlName="statut">
+        <option *ngFor="let statut of billetStatut | keyvalue" [value]="statut.value">
+          {{ statut.key }}
+        </option>
+      </select>
+        <button type="submit" [disabled]="billetForm.invalid">Ajouter Billet</button>
+    </form>
+</div>
+
+<div *ngIf="billets.length > 0">
+    <div *ngFor="let billet of billets">
+        <!-- Affichage et modification d'un billet -->
+        <!-- Utilisez des input pour permettre la modification, ex : <input [(ngModel)]="billet.sport"> -->
+        <button (click)="deactivateBillet(billet)">Désactiver</button>
+    </div>
+</div>
