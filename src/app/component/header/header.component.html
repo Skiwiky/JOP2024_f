@@ -5,13 +5,35 @@
             <img src="{{ logoAffiche }}" alt="Logo">
         </div>
         <div class="links border-menu">
-            <a routerLink="/boutique">Boutique</a>
-            <!-- Afficher le lien "Connexion" uniquement lorsque l'utilisateur n'est pas connecté -->
-            <a *ngIf="!loginService.isLoggedIn()" routerLink="/connexion">Connexion</a>
-            <!-- Afficher le menu déroulant lorsque l'utilisateur est connecté -->
-            <div class="dropdown" *ngIf="loginService.isLoggedIn()">
-                <a class="dropdown-item" routerLink="/profil">Profil</a>
-            </div>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/boutique" aria-current="page">Boutique</a>
+                </li>
+                <li class="nav-item" *ngIf="!loginService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/Connexion" aria-current="page">Connexion</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="loginService.isLoggedIn()">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="material-symbols-outlined">
+                        account_circle
+                        </span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="/profil">Profil</a></li>
+                        <li><a class="dropdown-item" routerLink="/home" (click)="logout()" class="btn btn-danger">Déconnexion</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+
+                <!--
+                <a routerLink="/boutique">Boutique</a>
+                <a *ngIf="!loginService.isLoggedIn()" routerLink="/connexion">Connexion</a>
+                <div class="dropdown" *ngIf="loginService.isLoggedIn()">
+                    <a class="dropdown-item" routerLink="/profil">Profil</a>
+                </div>
+                <div class="dropdown" *ngIf="loginService.isLoggedIn()">
+                    <button (click)="logout()" class="btn btn-danger">Déconnexion</button>
+                </div>
+            -->
+            </ul>
         </div>
 
     </div>

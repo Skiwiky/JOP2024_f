@@ -9,11 +9,7 @@ export class User {
   lastName: string;
   username: string;
   password: string;
-  birthDate: Date;
-  favouriteSport: string;
   wallet: Billet[];
-  adressFacturation: Adress | null;
-  adressSending: Adress;
   dataBank: DataBank | null;
 
   constructor(
@@ -38,11 +34,7 @@ export class User {
     this.lastName = lastName || '';
     this.username = username || '';
     this.password = password || '';
-    this.birthDate = birthDate || new Date();
-    this.favouriteSport = favouriteSport || '';
     this.wallet = wallet || [];
-    this.adressFacturation = adressFacturation || new Adress();
-    this.adressSending = adressSending || new Adress();
     this.dataBank = dataBank || new DataBank();
   }
 }

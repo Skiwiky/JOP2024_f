@@ -4,23 +4,7 @@
     <div *ngIf="showAlert" class="alert alert-danger" role="alert">
         {{ alertMessage }}
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginAlertModalLabel" aria-hidden="true" *ngIf="showAlert">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginAlertModalLabel">Attention</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ alertMessage }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="redirectToLogin()">Se connecter</button>>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div>
         <div class="user bloc-partie">
 
@@ -41,22 +25,16 @@
                 <label for="username">Nom d'utilisateur:</label>
                 <input type="text" id="username" name="username" [(ngModel)]="user.username">
             </div>
-            <div>
-                <label for="birthDate">Date de naissance: {{user.birthDate }}</label>
-            </div>
-            <div>
+            <!--
+                <div>
                 <label for="favouriteSport">Sport favori:</label>
                 <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
                 <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
               </select>
             </div>
+        -->
         </div>
 
-
-        <!-- Adresse de facturation -->
-        <div class="bloc-partie">
-            <app-address-bloc [adressFacturation]="user.adressFacturation" (addAdress)="addAdressFacturation()" (deleteAdress)="deleteAdressFacturation()"></app-address-bloc>
-        </div>
         <div class="bloc-partie">
             <app-bank-bloc [dataBank]="user.dataBank" (addDataBank)="addDataBank()" (deleteDataBank)="deleteDataBank()"> </app-bank-bloc>
         </div>
@@ -70,6 +48,48 @@
                     <input type="text" [(ngModel)]="billet.sport" placeholder="Sport">
                     <!-- Ajoutez les autres champs ici -->
                 </div>
+            </div>
+        </div>
+        <div class="bloc-partie">
+            <div class="bloc-supp">
+                <p>Suppression de votre compte et de vos données personnelles </p>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Supprimer Utilisateur</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal de confirmation de suppression-->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>En confirmant la suppression de votre compte, vous initiez l'effacement permanent de toutes vos données personnelles de notre base de données, conformément au Règlement Général sur la Protection des Données (RGPD).</p>
+                <h6>Ce que cela signifie :</h6>
+                <ul>
+                    <li>
+                        <h6>Suppression des données de compte :</h6>
+                        <p> Votre profil, vos identifiants et toutes les informations associées à votre compte seront définitivement supprimés.</p>
+                    </li>
+                    <li>
+                        <h6>Suppression des données associées :</h6>
+                        <p>Toute donnée ou contenu que vous avez généré, y compris les billets achetés, les transactions, et les interactions, sera également supprimé définitivement.</p>
+                    </li>
+                    <li>
+                        <h6>Aucune récupération possible :</h6>
+                        <p> Une fois votre compte supprimé, il n'y aura aucun moyen de récupérer vos données ou de restaurer votre accès.</p>
+                    </li>
+                </ul>
+                <p>Nous vous invitons à réfléchir soigneusement à cette décision. Si vous avez des données que vous souhaitez conserver ou si vous avez besoin de plus d'informations, veuillez nous contacter avant de procéder à la suppression.</p>
+                <p>Si vous comprenez les implications de cette action et souhaitez toujours procéder à la suppression de votre compte, veuillez cliquer sur "Supprimer".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteUser()" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
             </div>
         </div>
     </div>

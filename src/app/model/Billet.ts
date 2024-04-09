@@ -1,3 +1,5 @@
+import { Reservation } from "./Reservation";
+
 export class Billet {
     id: number;
     sport: string;
@@ -7,7 +9,7 @@ export class Billet {
     finalKey: string;
     price: number;
     categoryBillet: string;
-    userId?: number; 
+    reservation?: Reservation; 
   
     constructor(
       id?: number,
@@ -18,7 +20,7 @@ export class Billet {
       finalKey?: string,
       price?: number,
       categoryBillet?: string,
-      userId?: number
+      reservation?: Reservation,
     ) {
       this.id = id || 0;
       this.sport = sport || '';
@@ -28,7 +30,7 @@ export class Billet {
       this.finalKey = finalKey || '';
       this.price = price || 0;
       this.categoryBillet = categoryBillet || '';
-      this.userId = userId || 0;
+      this.reservation = reservation ;
     }
   }
   

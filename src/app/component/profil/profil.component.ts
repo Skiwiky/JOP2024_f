@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SPORTS_LIST } from 'src/app/Data/SPORTS_LIST';
-import { Adress } from 'src/app/model/Adress';
 import { DataBank } from 'src/app/model/DataBank';
 import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -69,14 +68,8 @@ export class ProfilComponent {
     });
   }
 
-  addAdressFacturation() {
-      if (!this.user.adressFacturation) {
-          this.user.adressFacturation = new Adress();
-      }
-  }
-
-  deleteAdressFacturation() {
-      this.user.adressFacturation = null;
+  deleteUser(){
+    console.log("suppression du User");
   }
 
   addDataBank() {

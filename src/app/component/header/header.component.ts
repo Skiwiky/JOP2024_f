@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { AuthGuardService } from 'src/app/services/authGuard/auth-guard.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -13,7 +14,7 @@ export class HeaderComponent {
   logoAffiche: string;
   evenement: string = 'Olympiques';
 
-  constructor(public loginService: LoginService) {
+  constructor(public loginService: LoginService, private router: Router) {
     this.logoAffiche = this.urlLogoJO;
   }
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class HeaderComponent {
 
   logout() {
     this.loginService.logout();
+    this.router.navigate(['/connexion']);
   }
 
 }
