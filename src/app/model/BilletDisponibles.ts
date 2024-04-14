@@ -1,5 +1,7 @@
+import { CITY } from "../Data/CITY";
+
 export enum BilletStatut {
-    // Assurez-vous de refléter les valeurs exactes définies dans l'enum Java
+    VIDE = "Choisir un statut de vente",
     IN_SOLD = 'DISPONIBLE',
     DESACTIVED = 'DESACTIVER',
     SOLDOUT = 'VENDU',
@@ -16,7 +18,7 @@ export enum BilletStatut {
     constructor(
       id: number = 0,
       sport: string = '',
-      localisation: string = '',
+      localisation: CITY = CITY.VIDE,
       dateEvent: string = '',
       category: string = '',
       statut: BilletStatut = BilletStatut.IN_SOLD 

@@ -26,15 +26,15 @@ export class ProfilComponent {
     private userService: UserService, 
     private loginService: LoginService, 
     private router: Router,
-    private storageService: StorageService) {}
+    private storageService: StorageService) {
+    }
 
   ngOnInit() {
-    this.loadUserDetails();
   }
 
   loadUserDetails() {
-   this.storageService.toString();
     const storedUserData = JSON.parse(this.storageService.getItem('user'));
+    console.log(storedUserData);
     if (storedUserData) {
       this.user = storedUserData;
     } else {
@@ -49,8 +49,12 @@ export class ProfilComponent {
       this.redirectToLogin();
       return;
     }
+    if (this.user.dataBanks) {
+      this.user.dataBanks.dataSaved = true;
+    } 
+
+    console.log(`Update user: ${JSON.stringify(this.user)}`);
     
-    console.log("Update user: " + this.user);
     const userId = Number(this.storageService.getItem('idUser'));
     this.userService.updateUser(userId, this.user).subscribe({
       next: (response) => {
@@ -73,13 +77,13 @@ export class ProfilComponent {
   }
 
   addDataBank() {
-      if (!this.user.dataBank) {
-          this.user.dataBank = new DataBank();
+      if (!this.user.dataBanks) {
+          this.user.dataBanks = new DataBank();
       }
   }
 
   deleteDataBank() {
-      this.user.dataBank = null;
+      this.user.dataBanks = null;
   }
 
   onFieldChange() {

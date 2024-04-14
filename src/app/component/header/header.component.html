@@ -10,7 +10,7 @@
                     <a class="nav-link" routerLink="/boutique" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item" *ngIf="!loginService.isLoggedIn()">
-                    <a class="nav-link" routerLink="/Connexion" aria-current="page">Connexion</a>
+                    <a class="nav-link" routerLink="/connexion" aria-current="page">Connexion</a>
                 </li>
                 <li class="nav-item dropdown" *ngIf="loginService.isLoggedIn()">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="material-symbols-outlined">
@@ -22,17 +22,6 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-
-                <!--
-                <a routerLink="/boutique">Boutique</a>
-                <a *ngIf="!loginService.isLoggedIn()" routerLink="/connexion">Connexion</a>
-                <div class="dropdown" *ngIf="loginService.isLoggedIn()">
-                    <a class="dropdown-item" routerLink="/profil">Profil</a>
-                </div>
-                <div class="dropdown" *ngIf="loginService.isLoggedIn()">
-                    <button (click)="logout()" class="btn btn-danger">Déconnexion</button>
-                </div>
-            -->
             </ul>
         </div>
 

@@ -1,17 +1,41 @@
-<app-header></app-header>
-<div>
+<h1>Bienvenue {{user.firstName}}</h1>
+<div class="form-container">
+    <h2>Ajouter un billet à la vente</h2>
     <form [formGroup]="billetForm" (ngSubmit)="addBillet()">
-        <input formControlName="sport" placeholder="Sport" />
-        <input formControlName="localisation" placeholder="Localisation" />
-        <input type="date" formControlName="dateEvent" placeholder="Date de l'événement" />
-        <input formControlName="category" placeholder="Catégorie" />
-        <select formControlName="statut">
-        <option *ngFor="let statut of billetStatut | keyvalue" [value]="statut.value">
-          {{ statut.key }}
+        <label for="sport-select">Sport:</label>
+        <select id="sport-select" formControlName="sport">
+        <option *ngFor="let sport of sportsList" [value]="sport.id">
+            {{ sport.nomComplet }}
         </option>
-      </select>
-        <button type="submit" [disabled]="billetForm.invalid">Ajouter Billet</button>
+    </select>
+
+        <label for="location-select">Localisation:</label>
+        <select id="location-select" formControlName="localisation">
+        <option *ngFor="let city of cities | keyvalue" [value]="city.key">
+            {{ city.value }}
+        </option>
+    </select>
+
+        <label for="date-event">Date de l'événement:</label>
+        <input id="date-event" type="date" formControlName="dateEvent" placeholder="Date de l'événement" />
+
+        <label for="category-select">Catégorie:</label>
+        <select id="category-select" formControlName="category">
+        <option *ngFor="let category of categorys | keyvalue" [value]="category.key">
+            {{ category.value }}
+        </option>
+    </select>
+
+        <label for="status-select">Statut:</label>
+        <select id="status-select" formControlName="statut">
+        <option *ngFor="let statut of billetStatut | keyvalue" [value]="statut.key">
+            {{ statut.value }}
+        </option>
+    </select>
+
+        <button type="submit">Ajouter Billet</button>
     </form>
+
 </div>
 
 <div *ngIf="billets.length > 0">

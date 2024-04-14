@@ -10,7 +10,7 @@ export class User {
   username: string;
   password: string;
   wallet: Billet[];
-  dataBank: DataBank | null;
+  dataBanks: DataBank | null;
 
   constructor(
     id?: number,
@@ -25,7 +25,7 @@ export class User {
     wallet?: Billet[],
     adressFacturation?: Adress,
     adressSending?: Adress,
-    dataBank?: DataBank
+    dataBanks?: DataBank
   ) {
     this.id = id || 0;
     this.userKey = userKey || '';
@@ -35,6 +35,6 @@ export class User {
     this.username = username || '';
     this.password = password || '';
     this.wallet = wallet || [];
-    this.dataBank = dataBank || new DataBank();
+    this.dataBanks = dataBanks || new DataBank();
   }
 }

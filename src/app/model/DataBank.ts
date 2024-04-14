@@ -3,7 +3,7 @@ export class DataBank {
     dataSaved: boolean;
     nameCard: string;
     numberCard: string;
-    keyCard: string;
+    cvv: string;
     dateClosed: string;
   
     constructor(
@@ -11,14 +11,14 @@ export class DataBank {
       dataSaved?: boolean,
       nameCard?: string,
       numberCard?: string,
-      keyCard?: string,
+      cvv?: string,
       dateClosed?: string,
     ) {
       this.id = id || 0;
       this.dataSaved = dataSaved || false;
       this.nameCard = nameCard || '';
       this.numberCard = numberCard || '';
-      this.keyCard = keyCard || '';
+      this.cvv = cvv || '';
       this.dateClosed = dateClosed || '';
     }
   }

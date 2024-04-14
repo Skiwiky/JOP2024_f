@@ -38,7 +38,7 @@ import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.compon
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+   // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
    // {provide: HTTP_INTERCEPTORS, useClass: TokenResfreshInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
