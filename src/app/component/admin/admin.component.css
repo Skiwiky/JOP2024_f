@@ -29,3 +29,67 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+
+/*css pour affichage liste des billet*/
+
+.billet-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.billet-header,
+.billet-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.billet-header {
+    background-color: #f2f2f2;
+    /* Une couleur pour l'en-tête */
+    font-weight: bold;
+}
+
+.header-item {
+    flex-basis: calc(100% / 6);
+    text-align: center;
+}
+
+.billet-data {
+    flex-basis: calc(100% / 6);
+    text-align: center;
+    padding: 10px;
+    margin: 2px;
+}
+
+.billet-container {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.form-control {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.billet-row {
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+.billet-header {
+    margin: auto;
+    width: 90%;
+}

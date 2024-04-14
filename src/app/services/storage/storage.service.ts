@@ -8,20 +8,20 @@ export class StorageService {
   constructor() { }
 
   setItem(key: string, value: any): void {
-    sessionStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   getItem(key: string): any {
-    const item = sessionStorage.getItem(key);
+    const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   }
 
   removeItem(key: string): void {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 
   clear(): void {
-    sessionStorage.clear();
+    localStorage.clear();
   }
   
 }

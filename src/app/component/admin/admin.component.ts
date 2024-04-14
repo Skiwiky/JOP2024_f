@@ -39,7 +39,9 @@ export class AdminComponent {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadBillets();
+  }
   loadUserDetails() {
     const storedUserData = JSON.parse(this.storageService.getItem('user'));
     if (storedUserData) {
@@ -49,6 +51,7 @@ export class AdminComponent {
       console.log('Aucune donnée utilisateur stockée trouvée. Veuillez vous connecter.');
     }
   }
+
   addBillet() {
       if (this.billetForm.valid) {
           const newBillet = new BilletDisponible(
@@ -60,10 +63,16 @@ export class AdminComponent {
               this.billetForm.value.statut
           );
 
-          this.billetDispoService.createBilletDisponible(newBillet);
+          this.billetDispoService.createBilletDisponible(newBillet).subscribe({
+            next: (response) => {
+              console.log('Billet créé', response);
+              this.billetForm.reset({ statut: BilletStatut.IN_SOLD }); 
+              this.loadBillets();
+            },
+            error: (error) => console.error('Erreur lors de la création', error)
+          });
           console.log('Billet ajouté:', newBillet);
-          this.billetForm.reset({ statut: BilletStatut.IN_SOLD }); 
-          this.router.navigate(['/admin']);
+          
       }
   }
 
@@ -83,6 +92,7 @@ export class AdminComponent {
   loadBillets(): void {
     this.billetService.getBilletsDisponibles({}).subscribe(billets => {
       this.billets = billets;
+      console.log(this.billets);
     });
   }
 }

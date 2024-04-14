@@ -30,6 +30,7 @@ export class ProfilComponent {
     }
 
   ngOnInit() {
+    this.loadUserDetails();
   }
 
   loadUserDetails() {
