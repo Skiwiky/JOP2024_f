@@ -1,1 +1,58 @@
-<p>offers works!</p>
+<div class="body">
+    <app-header></app-header>
+    <div class="main-content">
+        <div class="left-column">
+            <div class="filter-div">
+                <select [(ngModel)]="selectedSport" (ngModelChange)="filterBillets()">
+                    <option value="">Tous les sports</option>
+                    <option *ngFor="let sport of sportsList" [value]="sport.id">{{ sport.nomComplet }}</option>
+                </select>
+
+                <select [(ngModel)]="selectedCity" (ngModelChange)="filterBillets()">
+                    <option value="">Toutes les villes</option>
+                    <option *ngFor="let city of cities | keyvalue" [value]="city.key">{{ city.value }}</option>
+                </select>
+                <select [(ngModel)]="selectedCategory" (ngModelChange)="filterBillets()">
+                    <option value="">Toutes les catégories</option>
+                    <option *ngFor="let categorie of categorys | keyvalue" [value]="categorie.key">{{ categorie.value }}</option>
+                </select>
+            </div>
+            <div *ngIf="filteredBillets && filteredBillets.length > 0" class="billet-container">
+                <div *ngFor="let billet of filteredBillets" class="billet-card">
+                    <div class="card-header">
+                        <div class="city-date">
+                            <span class="city">{{ billet.localisation }}</span>
+                            <span class="date">{{ billet.dateEvent | date: 'mediumDate' }}</span>
+                        </div>
+                        <div class="category">{{ billet.category }}</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="sport">{{ billet.sport }}</span>
+                    </div>
+                    <div class="card-footer">
+                        <button class="add-to-cart material-symbols-outlined" (click)="addToCart(billet)">add</button>
+                        <div class="price">{{ billet.prix }} €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <h3>Panier en cours</h3>
+            <div *ngIf="panier && panier.length > 0; else emptyCart">
+                <div *ngFor="let billet of panier" class="panier-item">
+                    <span>{{ billet.sport }} {{ billet.category}} - {{ billet.prix }} €</span>
+                    <span class="remove-item material-symbols-outlined" (click)="removeFromCart(billet)">delete</span>
+                </div>
+                <div class="checkout">
+                    <div class="total">Total: {{ totalPanier }} €</div>
+                    <button class="order-button" (click)="checkout()">Commander</button>
+                </div>
+            </div>
+            <ng-template #emptyCart>
+                <div class="empty-cart">
+                    Votre panier est vide. Commencez à ajouter des billets!
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

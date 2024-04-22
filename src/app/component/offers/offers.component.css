@@ -1,0 +1,101 @@
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    width: 100%;
+}
+
+.left-column {
+    flex: 75%;
+}
+
+.right-column {
+    flex: 25%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.filter-div {
+    margin-bottom: 20px;
+}
+
+.billet-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.billet-card {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    width: calc(100% / 3 - 20px);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-header,
+.card-body,
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.add-to-cart {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: green;
+}
+
+.panier-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.remove-item {
+    cursor: pointer;
+    color: red;
+}
+
+.checkout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.order-button {
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.filter-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 10px;
+}
+
+.filter-div select {
+    flex-grow: 1;
+}

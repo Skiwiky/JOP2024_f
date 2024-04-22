@@ -17,7 +17,8 @@ export class BilletDisponibleService {
   }
 
   getBilletsDisponibles(queryParams: any): Observable<BilletDisponible[]> {
-    return this.http.get<BilletDisponible[]>(this.apiUrl, { params: queryParams, headers: this.getAuthHeaders()  });
+    const billetObservable = this.http.get<BilletDisponible[]>(this.apiUrl, { params: queryParams, headers: this.getAuthHeaders()  });
+    return billetObservable;
   }
 
   createBilletDisponible(billetDisponible: BilletDisponible): Observable<BilletDisponible> {

@@ -40,14 +40,21 @@
 
 <div *ngIf="billets && billets.length > 0" class="billet-container">
     <div class="billet-header">
-        <span class="header-item">Sport</span>
-        <span class="header-item">Ville</span>
+        <select [(ngModel)]="selectedSport" (ngModelChange)="filterBillets()">
+            <option value="">Tous les sports</option>
+            <option *ngFor="let sport of sportsList" [value]="sport.id">{{ sport.nomComplet }}</option>
+          </select>
+
+        <select [(ngModel)]="selectedCity" (ngModelChange)="filterBillets()">
+            <option value="">Toutes les villes</option>
+            <option *ngFor="let city of cities | keyvalue" [value]="city.key">{{ city.value }}</option>
+          </select>
         <span class="header-item">Date</span>
         <span class="header-item">Catégorie</span>
         <span class="header-item">Statut</span>
         <span class="header-item">Action</span>
     </div>
-    <div *ngFor="let billet of billets" class="billet-row">
+    <div *ngFor="let billet of filteredBillets" class="billet-row">
         <div class="billet-data">{{ billet.sport }}</div>
         <div class="billet-data">{{ billet.localisation }}</div>
         <div class="billet-data">{{ billet.dateEvent | date: 'mediumDate' }}</div>

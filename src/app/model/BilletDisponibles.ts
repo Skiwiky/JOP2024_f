@@ -2,7 +2,7 @@ import { CITY } from "../Data/CITY";
 
 export enum BilletStatut {
     VIDE = "Choisir un statut de vente",
-    IN_SOLD = 'DISPONIBLE',
+    IN_SOLD = 'IN_SOLD',
     DESACTIVED = 'DESACTIVER',
     SOLDOUT = 'VENDU',
   }
@@ -14,6 +14,7 @@ export enum BilletStatut {
     dateEvent: string; 
     category: string;
     statut: BilletStatut;
+    prix: number;
   
     constructor(
       id: number = 0,
@@ -21,7 +22,8 @@ export enum BilletStatut {
       localisation: CITY = CITY.VIDE,
       dateEvent: string = '',
       category: string = '',
-      statut: BilletStatut = BilletStatut.IN_SOLD 
+      statut: BilletStatut = BilletStatut.IN_SOLD,
+      prix: number = 0 
     ) {
       this.id = id;
       this.sport = sport;
@@ -29,5 +31,6 @@ export enum BilletStatut {
       this.dateEvent = dateEvent;
       this.category = category;
       this.statut = statut;
+      this.prix = prix;
     }
   }

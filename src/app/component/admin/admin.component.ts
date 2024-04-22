@@ -16,6 +16,9 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 })
 export class AdminComponent {
   billetForm: FormGroup;
+  selectedSport: string = '';
+  selectedCity: string = '';
+  filteredBillets: BilletDisponible[] = [];
   billets: BilletDisponible[] = [];
   billetStatut = BilletStatut;
   sportsList: Sport[] = SPORTS_LIST;
@@ -42,6 +45,16 @@ export class AdminComponent {
   ngOnInit() {
     this.loadBillets();
   }
+
+  filterBillets() {
+    console.log("test listener");
+    this.filteredBillets = this.billets.filter((billet) => {
+      return (this.selectedSport ? billet.sport === this.selectedSport : true) &&
+             (this.selectedCity ? billet.localisation === this.selectedCity : true);
+      // Add des autres filtres 
+    });
+  }
+
   loadUserDetails() {
     const storedUserData = JSON.parse(this.storageService.getItem('user'));
     if (storedUserData) {
@@ -92,6 +105,7 @@ export class AdminComponent {
   loadBillets(): void {
     this.billetService.getBilletsDisponibles({}).subscribe(billets => {
       this.billets = billets;
+      this.filteredBillets = this.billets;
       console.log(this.billets);
     });
   }
