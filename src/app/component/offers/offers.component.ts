@@ -29,8 +29,8 @@ export class OffersComponent {
 
   constructor( private billetService: BilletDisponibleService,
             private router:Router,
-            private billetDispoService: BilletDisponibleService,
             private storageService: StorageService ){
+              this.storageService.cleanExpiredLocalStorageItems();
 
   }
   ngOnInit() {
@@ -47,7 +47,7 @@ export class OffersComponent {
   }
 
   loadUserDetails() {
-    const storedUserData = JSON.parse(this.storageService.getItem('user'));
+    const storedUserData = JSON.parse(this.storageService.getItemWithExpiry('user'));
     if (storedUserData) {
       this.user = storedUserData;
     } else {
@@ -69,6 +69,7 @@ export class OffersComponent {
   addToCart(billet: BilletDisponible) {
     this.panier.push(billet);
     this.updateTotal();
+    this.storageService.setItemWithExpiry('panier', JSON.stringify(this.panier), 604800000 ); //une semaine
   }
 
   updateTotal() {
@@ -83,7 +84,8 @@ export class OffersComponent {
     const index = this.panier.findIndex(billet => billet === billetToRemove);
     if (index > -1) {
         this.panier.splice(index, 1);
+        this.storageService.setItemWithExpiry('panier', JSON.stringify(this.panier), 604800000); 
     }
     this.updateTotal();
-}
+  }
 }

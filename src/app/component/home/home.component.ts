@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +16,13 @@ export class HomeComponent {
   seconds: number;
   evenement: string = 'Olympiques';
 
-  constructor() {
+  constructor(private storageService: StorageService) {
     this.jour = 0;
     this.heure = 0;
     this.minutes = 0;
     this.seconds = 0;
     this.dateEvent = this.dateDebutJO;
+    this.storageService.cleanExpiredLocalStorageItems();
   }
 
   ngOnInit(): void {

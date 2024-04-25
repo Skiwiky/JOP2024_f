@@ -54,7 +54,7 @@ export class UserService {
 
   // Obtenir les en-têtes d'authentification
   private getAuthHeaders(): HttpHeaders  {
-    const token = this.storageService.getItem('authToken');
+    const token = this.storageService.getItemWithExpiry('authToken');
     return  new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

@@ -33,6 +33,8 @@ export class AdminComponent {
             private billetDispoService: BilletDisponibleService,
             private storageService: StorageService ) {
               this.loadUserDetails();
+              this.storageService.cleanExpiredLocalStorageItems();
+
     this.billetForm = this.fb.group({
         sport: [this.sportsList[0].id, Validators.required],
         localisation: [CITY.VIDE, Validators.required],
@@ -56,7 +58,7 @@ export class AdminComponent {
   }
 
   loadUserDetails() {
-    const storedUserData = JSON.parse(this.storageService.getItem('user'));
+    const storedUserData = JSON.parse(this.storageService.getItemWithExpiry('user'));
     if (storedUserData) {
       this.user = storedUserData;
     } else {

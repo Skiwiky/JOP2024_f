@@ -27,6 +27,8 @@ export class ProfilComponent {
     private loginService: LoginService, 
     private router: Router,
     private storageService: StorageService) {
+      this.storageService.cleanExpiredLocalStorageItems();
+
     }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class ProfilComponent {
   }
 
   loadUserDetails() {
-    const storedUserData = JSON.parse(this.storageService.getItem('user'));
+    const storedUserData = JSON.parse(this.storageService.getItemWithExpiry('user'));
     console.log(storedUserData);
     if (storedUserData) {
       this.user = storedUserData;
@@ -56,7 +58,7 @@ export class ProfilComponent {
 
     console.log(`Update user: ${JSON.stringify(this.user)}`);
     
-    const userId = Number(this.storageService.getItem('idUser'));
+    const userId = Number(this.storageService.getItemWithExpiry('idUser'));
     this.userService.updateUser(userId, this.user).subscribe({
       next: (response) => {
         this.showAlert = false; 
@@ -99,7 +101,7 @@ export class ProfilComponent {
   }
 
   updateFrontWithNewUserData(updatedUser: User) {
-    this.storageService.setItem('user', JSON.stringify(updatedUser));
+    this.storageService.setItemWithExpiry('user', JSON.stringify(updatedUser), 604800000); //on stocke une semaine
     this.user = updatedUser;
     }
 }

@@ -24,8 +24,8 @@ export class TokenResfreshInterceptor implements HttpInterceptor {
         }
 
       // Vérifier si le token est sur le point d'expirer
-      if (this.loginService.isTokenExpiringSoon( this.storageService.getItem('authToken'))) {
-        return this.loginService.refreshToken(this.storageService.getItem('authToken')).pipe(
+      if (this.loginService.isTokenExpiringSoon( this.storageService.getItemWithExpiry('authToken'))) {
+        return this.loginService.refreshToken(this.storageService.getItemWithExpiry('authToken')).pipe(
             switchMap((newToken: string) => {
                 // Ajouter le nouveau token à la requête originale
                 const clonedRequest = request.clone({

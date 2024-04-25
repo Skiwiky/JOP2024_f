@@ -25,12 +25,12 @@ export class LoginService {
           if (response && response.token && response.user) {
               console.log(response);
 
-              this.storageService.setItem('authToken', response.token);
-              this.storageService.setItem('user', JSON.stringify(response.user)); 
+              this.storageService.setItemWithExpiry('authToken', response.token, 604800000 );
+              this.storageService.setItemWithExpiry('user', JSON.stringify(response.user), 604800000); 
               if (response.user.id) {
-                  this.storageService.setItem('idUser', response.user.id.toString()); 
+                  this.storageService.setItemWithExpiry('idUser', response.user.id.toString(), 604800000); 
               }
-              const storedUser = this.storageService.getItem('user');
+              const storedUser = this.storageService.getItemWithExpiry('user');
               if (storedUser) {
                   console.log('affichage user', JSON.parse(storedUser)); 
               }
@@ -83,14 +83,14 @@ export class LoginService {
   }
 
   checkSession(): boolean {
-    const token = this.storageService.getItem('authToken');
+    const token = this.storageService.getItemWithExpiry('authToken');
     return !!token;
   }
 
   private generateAuthHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.storageService.getItem('authToken')}`
+      'Authorization': `Bearer ${this.storageService.getItemWithExpiry('authToken')}`
     });
   }
 
