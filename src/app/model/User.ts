@@ -9,6 +9,8 @@ export class User {
   lastName: string;
   username: string;
   password: string;
+  favoriteSport: string;
+  isAccepteCGU: boolean= false;
   wallet: Billet[];
   dataBanks: DataBank | null;
 
@@ -21,7 +23,7 @@ export class User {
     username?: string,
     password?: string,
     birthDate?: Date,
-    favouriteSport?: string,
+    favoriteSport?: string,
     wallet?: Billet[],
     adressFacturation?: Adress,
     adressSending?: Adress,
@@ -34,6 +36,7 @@ export class User {
     this.lastName = lastName || '';
     this.username = username || '';
     this.password = password || '';
+    this.favoriteSport = favoriteSport ||'';
     this.wallet = wallet || [];
     this.dataBanks = dataBanks || new DataBank();
   }

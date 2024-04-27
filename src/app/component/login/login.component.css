@@ -4,7 +4,6 @@
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
-    /* Ajustez selon vos besoins */
 }
 
 form {
@@ -31,9 +30,6 @@ label {
     margin-top: 20px;
 }
 
-
-/* Classe de base pour l'alerte, centrée horizontalement */
-
 .alert {
     width: 100%;
     text-align: center;
@@ -43,20 +39,33 @@ label {
 .alert-success,
 .alert-danger {
     margin: 0 auto;
-    /* Centrage horizontal */
     width: 50%;
-    /* Ajustez selon la largeur désirée */
     display: block;
-    /* Assurez-vous que l'alerte est traitée comme un bloc pour appliquer la marge */
 }
 
+.checkCgu {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
 
-/* Assurez-vous que vos alertes ne sont pas trop larges sur les petits écrans */
+.checkCgu input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.errorRegister {
+    background-color: #ffcccc;
+    color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 0.9em;
+    border: 1px solid #ff0000;
+}
 
 @media (max-width: 600px) {
     .alert-success,
     .alert-danger {
         width: 90%;
-        /* Plus large sur les petits écrans pour une meilleure lisibilité */
     }
 }
