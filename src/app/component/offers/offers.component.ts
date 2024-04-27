@@ -34,7 +34,9 @@ export class OffersComponent {
 
   }
   ngOnInit() {
+    this.loadUserDetails();
     this.loadBillets();
+    this.loadPanier();
   }
 
   filterBillets() {
@@ -64,6 +66,18 @@ export class OffersComponent {
     }, error => {
       console.error('Erreur lors du chargement des billets:', error);
     });
+  }
+
+  loadPanier() {
+    const storedPanier = this.storageService.getItemWithExpiry('panier');
+    console.log(storedPanier);
+    if (storedPanier) {
+      this.panier = JSON.parse(storedPanier);
+      this.updateTotal();  
+    } else {
+      console.log('Aucun panier stocké trouvé.');
+      this.panier = [];
+    }
   }
 
   addToCart(billet: BilletDisponible) {

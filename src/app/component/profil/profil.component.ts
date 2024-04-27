@@ -1,13 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router} from '@angular/router';
 import { SPORTS_LIST } from 'src/app/Data/SPORTS_LIST';
 import { DataBank } from 'src/app/model/DataBank';
 import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login/login.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { UserService } from 'src/app/services/user/user.service';
-
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-profil',

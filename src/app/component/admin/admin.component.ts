@@ -40,7 +40,8 @@ export class AdminComponent {
         localisation: [CITY.VIDE, Validators.required],
         dateEvent: ['', Validators.required],
         category: [CATEGORY.VIDE, Validators.required],
-        statut: [BilletStatut.VIDE, Validators.required]
+        statut: [BilletStatut.VIDE, Validators.required],
+        prix: ['', Validators.required]
     });
   }
 
@@ -75,7 +76,8 @@ export class AdminComponent {
               this.billetForm.value.localisation,
               this.billetForm.value.dateEvent,
               this.billetForm.value.category,
-              this.billetForm.value.statut
+              this.billetForm.value.statut,
+              this.billetForm.value.prix,
           );
 
           this.billetDispoService.createBilletDisponible(newBillet).subscribe({

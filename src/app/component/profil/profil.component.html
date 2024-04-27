@@ -25,14 +25,13 @@
                 <label for="username">Nom d'utilisateur:</label>
                 <input type="text" id="username" name="username" [(ngModel)]="user.username">
             </div>
-            <!--
-                <div>
+            <div>
                 <label for="favouriteSport">Sport favori:</label>
-                <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
-                <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
-              </select>
+                <select name="sports" id="favouriteSport" [(ngModel)]="user.favoriteSport">
+                    <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
+                </select>
             </div>
-        -->
+
         </div>
 
         <div class="bloc-partie">
