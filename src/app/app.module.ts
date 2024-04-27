@@ -17,7 +17,7 @@ import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfr
 import { AddressBlocComponent } from './component/profil/address-bloc/address-bloc.component';
 import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.component';
 import { CGUComponent } from './component/cgu/cgu.component';
-import { PanierComponent } from './component/panier/panier/panier.component';
+import { PanierComponent } from './component/panier/panier.component';
 
 @NgModule({
   declarations: [

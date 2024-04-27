@@ -7,6 +7,7 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
 import { AdminComponent } from './component/admin/admin.component';
 import { CGUComponent } from './component/cgu/cgu.component';
+import { PanierComponent } from './component/panier/panier.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent,canActivate: [AuthGuardService], data: { roles: ['USER', 'ADMIN'] }},
   { path: 'admin', component:AdminComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] }},
   { path: 'cgu', component:CGUComponent},
+  { path: 'panier', component: PanierComponent},
 ];
 
 @NgModule({
