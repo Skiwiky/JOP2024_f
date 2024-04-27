@@ -20,6 +20,7 @@ export class LoginComponent {
   newFirstName: string;
   newLastName: string;
   newBirthDate: Date;
+  acceptTerms: Boolean;
 
   private user: User = new User;
   
@@ -43,6 +44,7 @@ export class LoginComponent {
     this.newFirstName = '';
     this.newLastName = '';
     this.newBirthDate = new Date();
+    this.acceptTerms = false;
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,7 +56,8 @@ export class LoginComponent {
       newLastName: ['', [Validators.required]],
       newUsername: ['', [Validators.required, Validators.email]],
       newPassword: ['', [Validators.required]],
-      newBirthDate: ['', [Validators.required, this.ageValidator(18)]]
+      newBirthDate: ['', [Validators.required, this.ageValidator(18)]],
+      acceptTerms: [false, Validators.requiredTrue]
     });
    }
 
@@ -86,7 +89,8 @@ export class LoginComponent {
         lastName: this.registerForm.get('newLastName')?.value,
         username: this.registerForm.get('newUsername')?.value,
         password: this.registerForm.get('newPassword')?.value,
-        birthDate: this.registerForm.get('newBirthDate')?.value
+        birthDate: this.registerForm.get('newBirthDate')?.value,
+        isAcceptCGU: this.registerForm.get('acceptTerms')?.value,
       };
       this.loginService.signup(newUser)
       .subscribe({

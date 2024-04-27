@@ -16,6 +16,7 @@ import { AuthInterceptor } from './interceptor/error/auth.interceptor';
 import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfresh.interceptor';
 import { AddressBlocComponent } from './component/profil/address-bloc/address-bloc.component';
 import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.component';
+import { CGUComponent } from './component/cgu/cgu.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.compon
     FooterComponent,
     AdminComponent,
     AddressBlocComponent,
-    BankBlocComponent
+    BankBlocComponent,
+    CGUComponent
   ],
   imports: [
     BrowserModule,
