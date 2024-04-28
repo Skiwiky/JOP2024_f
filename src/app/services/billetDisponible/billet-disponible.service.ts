@@ -44,10 +44,12 @@ export class BilletDisponibleService {
 
    // Obtenir les en-têtes d'authentification
    private getAuthHeaders(): HttpHeaders  {
-    const token = this.storageService.getItemWithExpiry('authToken');
+    const tokenJSON = this.storageService.getItemWithExpiry('authToken');
+    console.log('tokenJSON'+tokenJSON);
+    
     return  new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${tokenJSON}`
       });
   }
 }
