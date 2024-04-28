@@ -1,71 +1,46 @@
-.form-container {
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
+}
+
+.body-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-top: 50px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: auto;
+    margin-bottom: 30px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-}
-
-input,
-button {
-    margin: 10px 0;
-}
-
-.btn-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.btnAction {
-    width: 60%;
-}
-
-label {
-    margin-top: 20px;
+.footer {
+    flex-shrink: 0;
+    width: 100%;
 }
 
 .alert {
     width: 100%;
     text-align: center;
-    position: relative;
+    margin-bottom: 20px;
 }
 
-.alert-success,
-.alert-danger {
-    margin: 0 auto;
-    width: 50%;
-    display: block;
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
-.checkCgu {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.checkCgu input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.errorRegister {
-    background-color: #ffcccc;
-    color: #333;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    font-size: 0.9em;
-    border: 1px solid #ff0000;
-}
-
-@media (max-width: 600px) {
-    .alert-success,
-    .alert-danger {
-        width: 90%;
-    }
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
 }

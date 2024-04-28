@@ -1,3 +1,7 @@
+h2 {
+    font-family: "Paris";
+}
+
 .panier,
 .utilisateur,
 .dataBank {
@@ -84,4 +88,15 @@ input[type="password"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.dataBank-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.center-btn {
+    padding: 10px 20px;
+    font-size: 16px;
 }

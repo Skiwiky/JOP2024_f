@@ -3,9 +3,18 @@
     flex-direction: column;
 }
 
+h2 {
+    font-family: "Paris";
+}
+
 .main-content {
     display: flex;
-    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .left-column {
@@ -19,7 +28,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-left: 25px;
-    margin-right: 25px;
 }
 
 .filter-div {

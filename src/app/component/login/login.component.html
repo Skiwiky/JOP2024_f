@@ -2,80 +2,84 @@
 <div *ngIf="showAlert" class="alert" [class]="alertType === 'success' ? 'alert-success' : 'alert-danger'" role="alert">
     {{ alertMessage }}
 </div>
-<div *ngIf="isLoginFormVisible" class="form-container">
-    <h2>Se connecter</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="signin()">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" formControlName="email" placeholder="Email">
-        <label for="password" class="form-label">Mot de passe</label>
-        <input type="password" formControlName="password" placeholder="Mot de passe">
-        <div class="btn-container">
-            <button type="submit" class="btnAction btn btn-primary">Se connecter</button>
-        </div>
-    </form>
-    <button (click)="toggleForm()" class="btn btn-light">Pas encore de compte</button>
+<div class="body-container">
+
+    <div *ngIf="isLoginFormVisible" class="form-container">
+        <h2>Se connecter</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="signin()">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" formControlName="email" placeholder="Email">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" formControlName="password" placeholder="Mot de passe">
+            <div class="btn-container">
+                <button type="submit" class="btnAction btn btn-primary">Se connecter</button>
+            </div>
+        </form>
+        <button (click)="toggleForm()" class="btn btn-light">Pas encore de compte</button>
+    </div>
+
+    <div *ngIf="!isLoginFormVisible" class="form-container">
+        <h2>S'inscrire</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="signup()">
+            <div>
+                <label for="newFirstName">Prénom</label>
+                <input type="text" formControlName="newFirstName" placeholder="Prénom">
+                <div *ngIf="registerForm.get('newFirstName')?.touched && registerForm.get('newFirstName')?.hasError('required')" class="errorRegister">
+                    Le prénom est requis.
+                </div>
+            </div>
+            <div>
+                <label for="newLastName">Nom</label>
+                <input type="text" formControlName="newLastName" placeholder="Nom">
+                <div *ngIf="registerForm.get('newLastName')?.touched && registerForm.get('newLastName')?.hasError('required')" class="errorRegister">
+                    Le nom est requis.
+                </div>
+            </div>
+            <div>
+                <label for="newUsername">Email</label>
+                <input type="email" formControlName="newUsername" placeholder="Email">
+                <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['required']" class="errorRegister">
+                    Email est requis.
+                </div>
+                <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['email']" class="errorRegister">
+                    Format d'email invalide.
+                </div>
+
+            </div>
+            <div>
+                <label for="newPassword">Mot de passe</label>
+                <input type="password" formControlName="newPassword" placeholder="Mot de passe">
+                <div *ngIf="registerForm.get('newPassword')?.touched && registerForm.get('newPassword')?.errors?.['required']" class="errorRegister">
+                    Mot de passe est requis.
+                </div>
+                <div *ngIf="registerForm.get('newPassword')?.dirty && registerForm.get('newPassword')?.errors?.['minLength']" class="errorRegister">
+                    Le mot de passe doit comporter au moins {{ registerForm.get('newPassword')?.errors?.['minLength']?.requiredLength }} caractères.
+                </div>
+
+            </div>
+            <div>
+                <label for="newBirthDate">Date de  naissance</label>
+                <input type="date" formControlName="newBirthDate" placeholder="Date de naissance">
+                <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['required']" class="errorRegister">
+                    Date de naissance est requise.
+                </div>
+                <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['minAge']" class="errorRegister">
+                    Vous devez avoir au moins 18 ans.
+                </div>
+            </div>
+            <div class="checkCgu">
+                <input type="checkbox" id="cguCheckbox" formControlName="acceptTerms">
+                <label for="cguCheckbox">J'accepte les <a [routerLink]="['/cgu']">Conditions Générales d'Utilisation</a> et les conditions générales de vente</label>
+            </div>
+            <div *ngIf="registerForm.get('acceptTerms')?.dirty && registerForm.get('acceptTerms')?.errors?.['required']" class="errorRegister">
+                Les conditions doivent etre acceptés.
+            </div>
+
+            <div class="btn-container"><button type="submit" class="btnAction btn btn-primary">Créer son compte</button></div>
+
+        </form>
+        <button (click)="toggleForm()" class="btn btn-light">J'ai un compte</button>
+    </div>
 </div>
 
-<div *ngIf="!isLoginFormVisible" class="form-container">
-    <h2>S'inscrire</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="signup()">
-        <div>
-            <label for="newFirstName">Prénom</label>
-            <input type="text" formControlName="newFirstName" placeholder="Prénom">
-            <div *ngIf="registerForm.get('newFirstName')?.touched && registerForm.get('newFirstName')?.hasError('required')" class="errorRegister">
-                Le prénom est requis.
-            </div>
-        </div>
-        <div>
-            <label for="newLastName">Nom</label>
-            <input type="text" formControlName="newLastName" placeholder="Nom">
-            <div *ngIf="registerForm.get('newLastName')?.touched && registerForm.get('newLastName')?.hasError('required')" class="errorRegister">
-                Le nom est requis.
-            </div>
-        </div>
-        <div>
-            <label for="newUsername">Email</label>
-            <input type="email" formControlName="newUsername" placeholder="Email">
-            <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['required']" class="errorRegister">
-                Email est requis.
-            </div>
-            <div *ngIf="registerForm.get('newUsername')?.touched && registerForm.get('newUsername')?.errors?.['email']" class="errorRegister">
-                Format d'email invalide.
-            </div>
-
-        </div>
-        <div>
-            <label for="newPassword">Mot de passe</label>
-            <input type="password" formControlName="newPassword" placeholder="Mot de passe">
-            <div *ngIf="registerForm.get('newPassword')?.touched && registerForm.get('newPassword')?.errors?.['required']" class="errorRegister">
-                Mot de passe est requis.
-            </div>
-            <div *ngIf="registerForm.get('newPassword')?.dirty && registerForm.get('newPassword')?.errors?.['minLength']" class="errorRegister">
-                Le mot de passe doit comporter au moins {{ registerForm.get('newPassword')?.errors?.['minLength']?.requiredLength }} caractères.
-            </div>
-
-        </div>
-        <div>
-            <label for="newBirthDate">Date de  naissance</label>
-            <input type="date" formControlName="newBirthDate" placeholder="Date de naissance">
-            <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['required']" class="errorRegister">
-                Date de naissance est requise.
-            </div>
-            <div *ngIf="registerForm.get('newBirthDate')?.dirty && registerForm.get('newBirthDate')?.errors?.['minAge']" class="errorRegister">
-                Vous devez avoir au moins 18 ans.
-            </div>
-        </div>
-        <div class="checkCgu">
-            <input type="checkbox" id="cguCheckbox" formControlName="acceptTerms">
-            <label for="cguCheckbox">J'accepte les <a [routerLink]="['/cgu']">Conditions Générales d'Utilisation</a> et les conditions générales de vente</label>
-        </div>
-        <div *ngIf="registerForm.get('acceptTerms')?.dirty && registerForm.get('acceptTerms')?.errors?.['required']" class="errorRegister">
-            Les conditions doivent etre acceptés.
-        </div>
-
-        <div class="btn-container"><button type="submit" class="btnAction btn btn-primary">Créer son compte</button></div>
-
-    </form>
-    <button (click)="toggleForm()" class="btn btn-light">J'ai un compte</button>
-</div>
 <app-footer></app-footer>

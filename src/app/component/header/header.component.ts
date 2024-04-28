@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { User } from 'src/app/model/User';
 import { AuthGuardService } from 'src/app/services/authGuard/auth-guard.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -14,11 +15,20 @@ export class HeaderComponent {
   urlLogoJP: string = '../../../assets/img/Logo_JP24.svg';
   logoAffiche: string;
   evenement: string = 'Olympiques';
+  isUserLogged: boolean = false;
+  user: User;
 
-  constructor(public loginService: LoginService, private router: Router) {
+  constructor(public loginService: LoginService, private storageService:StorageService, private router: Router) {
+    
+    this.storageService.cleanExpiredLocalStorageItems();
     this.logoAffiche = this.urlLogoJO;
+    this.user = new User(0,'','','','','','');
   }
+
   ngOnInit(): void {
+    this.isUserLogged = this.loginService.isLoggedIn();
+    this.user = JSON.parse(this.storageService.getItemWithExpiry('user'));
+    console.log(this.user);
     setInterval(() => {
       if (this.evenement === 'Olympiques') {
         this.logoAffiche = this.urlLogoJP;
@@ -34,6 +44,10 @@ export class HeaderComponent {
   logout() {
     this.loginService.logout();
     this.router.navigate(['/connexion']);
+    this.isUserLogged= false;
+  }
+  goHome(){
+    this.router.navigate(['/']);
   }
 
 }

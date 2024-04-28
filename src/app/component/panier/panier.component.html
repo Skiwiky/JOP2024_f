@@ -20,39 +20,45 @@
         </div>
     </ng-template>
 </div>
-<div class="utilisateur">
-    <h2>Données utilisateur</h2>
-    <div>
-        <label for="firstName">Prénom :</label>
-        <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+<ng-template #emptyCart>
+    <div class="utilisateur">
+        <h2>Données utilisateur</h2>
+        <div>
+            <label for="firstName">Prénom :</label>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+        </div>
+        <div>
+            <label for="lastName">Nom :</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+        </div>
+        <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" [(ngModel)]="user.username">
+        </div>
     </div>
-    <div>
-        <label for="lastName">Nom :</label>
-        <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+    <div class="dataBank">
+        <h2>Données bancaires</h2>
+        <div>
+            <label for="numeroCarte">Numéro de carte :</label>
+            <input type="text" id="numeroCarte" name="numberCard" [(ngModel)]="dataBanks.numberCard" placeholder="XXXX XXXX XXXX XXXX">
+        </div>
+        <div>
+            <label for="dateCarte">Date :</label>
+            <input type="text" id="dateCarte" name="dateClosed" [(ngModel)]="dataBanks.dateClosed" placeholder="MM/AA">
+        </div>
+        <div>
+            <label for="cleCarte">Code de sécurité :</label>
+            <input type="text" id="cleCarte" name="cvv" [(ngModel)]="dataBanks.cvv" placeholder="XXX">
+        </div>
+        <div>
+            <input type="checkbox" id="savedData" [(ngModel)]="dataBanks.dataSaved">
+            <label for="savedData">Je souhaite sauvegarder mes données bancaires.</label>
+        </div>
     </div>
-    <div>
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" [(ngModel)]="user.username">
+    <div class="dataBank-actions">
+        <button class="btn btn-primary center-btn" (click)="validePanier()">Valider ma commande</button>
     </div>
-</div>
-<div class="dataBank">
-    <h2>Données bancaires</h2>
-    <div>
-        <label for="numeroCarte">Numéro de carte :</label>
-        <input type="text" id="numeroCarte" name="numberCard" [(ngModel)]="dataBanks.numberCard" placeholder="XXXX XXXX XXXX XXXX">
-    </div>
-    <div>
-        <label for="dateCarte">Date :</label>
-        <input type="text" id="dateCarte" name="dateClosed" [(ngModel)]="dataBanks.dateClosed" placeholder="MM/AA">
-    </div>
-    <div>
-        <label for="cleCarte">Code de sécurité :</label>
-        <input type="text" id="cleCarte" name="cvv" [(ngModel)]="dataBanks.cvv" placeholder="XXX">
-    </div>
-    <div>
-        <input type="checkbox" id="savedData" [(ngModel)]="dataBanks.dataSaved">
-        <label for="savedData">Je souhaite sauvegarder mes données bancaires.</label>
-    </div>
-</div>
+</ng-template>
+
 
 <app-footer></app-footer>

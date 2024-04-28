@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 50px, rgba(255, 255, 255, 0));
+    margin-bottom: 30px;
 }
 
 .container {

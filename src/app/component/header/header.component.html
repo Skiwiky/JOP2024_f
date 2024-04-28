@@ -2,7 +2,7 @@
     <div class="container">
         <div class="border-menu"></div>
         <div class="logo">
-            <img src="{{ logoAffiche }}" alt="Logo">
+            <img src="{{ logoAffiche }}" alt="Logo" (click)="goHome()">
         </div>
         <div class="links border-menu">
             <ul class="nav nav-pills">
@@ -18,8 +18,9 @@
                         </span></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" routerLink="/profil">Profil</a></li>
+                        <li><a class="dropdown-item" routerLink="/panier">Panier</a></li>
+                        <li *ngIf="user && user.role === 'ADMIN'"><a class="dropdown-item" routerLink="/admin">Admin</a></li>
                         <li><a class="dropdown-item" routerLink="/home" (click)="logout()" class="btn btn-danger">Déconnexion</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
             </ul>

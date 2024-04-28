@@ -71,7 +71,9 @@ export class PanierComponent {
     this.updateTotal();
   }
 
-  checkout() {
-   //lancer appel pour payer   
+  validePanier() {
+    console.log('Panier:', this.panier);
+    console.log('Utilisateur:', this.user);
+    console.log('Données Bancaires:', this.dataBanks);
   }
 }

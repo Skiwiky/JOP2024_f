@@ -2,6 +2,7 @@
     <app-header></app-header>
     <div class="main-content">
         <div class="left-column">
+            <h2>Choisissez vos billets </h2>
             <div class="filter-div">
                 <select [(ngModel)]="selectedSport" (ngModelChange)="filterBillets()">
                     <option value="">Tous les sports</option>
@@ -37,7 +38,7 @@
             </div>
         </div>
         <div class="right-column">
-            <h3>Panier en cours</h3>
+            <h2>Panier en cours</h2>
             <div *ngIf="panier && panier.length > 0; else emptyCart">
                 <div *ngFor="let billet of panier" class="panier-item">
                     <span>{{ billet.sport }} {{ billet.category}} - {{ billet.prix }} €</span>
