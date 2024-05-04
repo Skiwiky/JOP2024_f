@@ -18,6 +18,7 @@ export class OffersComponent {
   selectedCity: string = '';
   selectedCategory: string = '';
   filteredBillets: BilletDisponible[] = [];
+  displayedBillets: BilletDisponible[] = [];
   billets: BilletDisponible[] = [];
   billetStatut = BilletStatut;
   sportsList: Sport[] = SPORTS_LIST;
@@ -26,13 +27,14 @@ export class OffersComponent {
   user: User = new User();
   panier: BilletDisponible[] = [];
   totalPanier: number = 0;
+  maxItemsToShow = 9;
 
   constructor( private billetService: BilletDisponibleService,
             private router:Router,
             private storageService: StorageService ){
               this.storageService.cleanExpiredLocalStorageItems();
-
   }
+
   ngOnInit() {
     this.loadUserDetails();
     this.loadBillets();
@@ -40,21 +42,18 @@ export class OffersComponent {
   }
 
   filterBillets() {
-    console.log("test listener");
-    this.filteredBillets = this.billets.filter((billet) => {
-      return (this.selectedSport ? billet.sport === this.selectedSport : true) &&
-             (this.selectedCity ? billet.localisation === this.selectedCity : true);
-      // Add des autres filtres 
-    });
+    this.filteredBillets = this.billets.filter(billet => 
+      (this.selectedSport ? billet.sport === this.selectedSport : true) &&
+      (this.selectedCity ? billet.localisation === this.selectedCity : true) &&
+      (this.selectedCategory ? billet.category === this.selectedCategory : true)
+    );
+    this.updateDisplayedBillets(); 
   }
 
   loadUserDetails() {
     const storedUserData = JSON.parse(this.storageService.getItemWithExpiry('user'));
     if (storedUserData) {
       this.user = storedUserData;
-    } else {
-      this.router.navigate(['/home']);
-      console.log('Aucune donnée utilisateur stockée trouvée. Veuillez vous connecter.');
     }
   }
 
@@ -67,6 +66,10 @@ export class OffersComponent {
       console.error('Erreur lors du chargement des billets:', error);
     });
   }
+  loadMoreBillets() {
+    this.maxItemsToShow += 9; 
+    this.updateDisplayedBillets();
+  }
 
   loadPanier() {
     const storedPanier = this.storageService.getItemWithExpiry('panier');
@@ -78,6 +81,10 @@ export class OffersComponent {
       console.log('Aucun panier stocké trouvé.');
       this.panier = [];
     }
+  }
+
+  updateDisplayedBillets() {
+    this.displayedBillets = this.filteredBillets.slice(0, this.maxItemsToShow);
   }
 
   addToCart(billet: BilletDisponible) {
@@ -101,5 +108,13 @@ export class OffersComponent {
         this.storageService.setItemWithExpiry('panier', JSON.stringify(this.panier), 604800000); 
     }
     this.updateTotal();
+  }
+
+  resetFilters() {
+    this.selectedSport = '';
+    this.selectedCity = '';
+    this.selectedCategory = '';
+    this.filterBillets();
+    this.updateDisplayedBillets();
   }
 }

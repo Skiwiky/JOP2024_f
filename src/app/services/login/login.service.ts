@@ -25,7 +25,7 @@ export class LoginService {
           if (response && response.token && response.user) {
               console.log(response);
 
-              this.storageService.setItemWithExpiry('authToken', response.token, 604800000 );
+              this.storageService.setItemWithExpiry('authToken', response.token, 3600000 ); //le token expire au bout d'1 heure  
               this.storageService.setItemWithExpiry('user', JSON.stringify(response.user), 604800000); 
               if (response.user.id) {
                   this.storageService.setItemWithExpiry('idUser', response.user.id.toString(), 604800000); 

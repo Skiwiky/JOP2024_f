@@ -22,13 +22,13 @@ export class BilletDisponibleService {
   }
 
   createBilletDisponible(billetDisponible: BilletDisponible): Observable<BilletDisponible> {
-    console.log("on est dans le service de billet");
+    console.log("on est dans le service de reservation");
     return this.http.post<BilletDisponible>(this.apiUrl, billetDisponible, { headers: this.getAuthHeaders() }).pipe(
       tap(response => {
         console.log("Création réussie", response);
       }),
       catchError((error) => {
-          console.error('Erreur de la creation du billet', error);
+          console.error('Erreur de la creation de la reservation', error);
           return throwError(() => new Error('Une erreur est survenue lors de la tentative de creation.'));
       })
   );
