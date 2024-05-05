@@ -17,11 +17,11 @@ import { BillerDispoToBilletService } from 'src/app/services/utils/biller-dispo-
 })
 export class PanierComponent {
   user: User = new User();
-  dataBanks = new DataBank();
+  dataBanks: DataBank = new DataBank();
   panier: BilletDisponible[] = [];
   totalPanier: number = 0;
   reservation = new Reservation();
-  billets: Billet[] = [];
+  tickets: Billet[] = [];
 
   constructor(
     private router:Router,
@@ -81,11 +81,12 @@ export class PanierComponent {
   }
 
   validePanier() {
-    this.billets = this.billetDispoToBillet.transformBilletsDisponiblesToBillets(JSON.parse(this.storageService.getItemWithExpiry('panier')))
+    this.tickets = this.billetDispoToBillet.transformBilletsDisponiblesToBillets(JSON.parse(this.storageService.getItemWithExpiry('panier')))
+    console.log("dataBanks" + this.user.dataBanks);
     this.reservation = new Reservation(
       undefined,
       this.user,
-      this.billets,
+      this.tickets,
       new Date(),
       true
     );

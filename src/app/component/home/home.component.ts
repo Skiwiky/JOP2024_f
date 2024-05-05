@@ -16,6 +16,8 @@ export class HomeComponent {
   seconds: number;
   evenement: string = 'Olympiques';
 
+  yourData = 'Voici le contenu du QR Code';
+  
   constructor(private storageService: StorageService) {
     this.jour = 0;
     this.heure = 0;

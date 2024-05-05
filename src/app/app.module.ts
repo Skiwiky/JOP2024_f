@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,6 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { LoginComponent } from './component/login/login.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './component/admin/admin.component';
 import { AuthInterceptor } from './interceptor/error/auth.interceptor';
 import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfresh.interceptor';
@@ -18,6 +18,7 @@ import { AddressBlocComponent } from './component/profil/address-bloc/address-bl
 import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.component';
 import { CGUComponent } from './component/cgu/cgu.component';
 import { PanierComponent } from './component/panier/panier.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PanierComponent } from './component/panier/panier.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule, 
-    AppRoutingModule
+    AppRoutingModule,
+    QRCodeModule
   ],
   providers: [
    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
