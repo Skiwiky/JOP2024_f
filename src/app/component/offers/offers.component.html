@@ -4,11 +4,11 @@
         <!-- Colonne de gauche pour les billets favoris et tous les évènements -->
         <div class="left-column">
             <!-- Section des billets favoris -->
-            <div *ngIf="user.favoriteSport">
+            <div *ngIf="user.favouriteSport">
                 <h2>Votre sport favori</h2>
                 <div class="billet-container">
                     <ng-container *ngFor="let billet of filteredBillets">
-                        <div class="billet-card" *ngIf="billet.sport === user.favoriteSport">
+                        <div class="billet-card" *ngIf="billet.sport === user.favouriteSport">
                             <div class="card-header">
                                 <div class="city-date">
                                     <span class="city">{{ billet.localisation }}</span>
@@ -30,15 +30,15 @@
             <!-- Section des filtres et liste des billets -->
             <h2>Nos différents évènements</h2>
             <div class="filter-div">
-                <select [(ngModel)]="selectedSport" (ngModelChange)="filterBillets()">
+                <select class="select-filter" [(ngModel)]="selectedSport" (ngModelChange)="filterBillets()">
                     <option value="">Tous les sports</option>
                     <option *ngFor="let sport of sportsList" [value]="sport.id">{{ sport.nomComplet }}</option>
                 </select>
-                <select [(ngModel)]="selectedCity" (ngModelChange)="filterBillets()">
+                <select class="select-filter" [(ngModel)]="selectedCity" (ngModelChange)="filterBillets()">
                     <option value="">Toutes les villes</option>
                     <option *ngFor="let city of cities | keyvalue" [value]="city.key">{{ city.value }}</option>
                 </select>
-                <select [(ngModel)]="selectedCategory" (ngModelChange)="filterBillets()">
+                <select class="select-filter" [(ngModel)]="selectedCategory" (ngModelChange)="filterBillets()">
                     <option value="">Toutes les catégories</option>
                     <option *ngFor="let categorie of categorys | keyvalue" [value]="categorie.key">{{ categorie.value }}</option>
                 </select>

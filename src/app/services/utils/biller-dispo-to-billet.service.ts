@@ -16,11 +16,11 @@ export class BillerDispoToBilletService {
     billet.id = 0; 
     billet.sport = billetDisponible.sport || 'Inconnu';  
     billet.localisation = billetDisponible.localisation || 'Non spécifiée';  
-    billet.date = billetDisponible.dateEvent ? new Date(billetDisponible.dateEvent) : new Date();
-    billet.price = billetDisponible.prix || 0;
-    billet.categoryBillet = billetDisponible.category || 'Générale';
+    billet.dateEvent = billetDisponible.dateEvent ? new Date(billetDisponible.dateEvent) : new Date();
+    billet.prix = billetDisponible.prix || 0;
+    billet.category = billetDisponible.category || 'Générale';
     billet.billetKey = ''; 
-    billet.finalKey = ''; 
+    billet.reservatioKey = ''; 
 
     return billet;
   }

@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { CATEGORY } from 'src/app/Data/CATEGORY';
 import { CITY } from 'src/app/Data/CITY';
 import { SPORTS_LIST, Sport } from 'src/app/Data/SPORTS_LIST';
+import { Billet } from 'src/app/model/Billet';
 import { BilletDisponible, BilletStatut } from 'src/app/model/BilletDisponibles';
 import { User } from 'src/app/model/User';
+import { BilletService } from 'src/app/services/billet/billet.service';
 import { BilletDisponibleService } from 'src/app/services/billetDisponible/billet-disponible.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
@@ -18,8 +20,8 @@ export class AdminComponent {
   billetForm: FormGroup;
   selectedSport: string = '';
   selectedCity: string = '';
-  filteredBillets: BilletDisponible[] = [];
-  billets: BilletDisponible[] = [];
+  filteredBilletsDisponible: BilletDisponible[] = [];
+  billetsDisponible: BilletDisponible[] = [];
   billetStatut = BilletStatut;
   sportsList: Sport[] = SPORTS_LIST;
   cities = CITY;
@@ -27,11 +29,25 @@ export class AdminComponent {
   user: User = new User();
 
 
+  // Initialisation de l'onglet actif
+  activeTab: 'form' | 'dashboard' = 'form';
+  billets: Billet[] = [];
+  prixTotalBilletVendu: number = 0;
+  nbBilletSolo: number = 0;
+  nbBilletDuo: number = 0;
+  nbBilletFamille: number = 0;
+
+  setActiveTab(tab: 'form' | 'dashboard'): void {
+    this.activeTab = tab;
+  }
+
+
   constructor(private fb: FormBuilder, 
             private billetService: BilletDisponibleService,
             private router:Router,
             private billetDispoService: BilletDisponibleService,
-            private storageService: StorageService ) {
+            private storageService: StorageService,
+            private billetsService: BilletService ) {
               this.loadUserDetails();
               this.storageService.cleanExpiredLocalStorageItems();
 
@@ -46,12 +62,13 @@ export class AdminComponent {
   }
 
   ngOnInit() {
-    this.loadBillets();
+    this.loadBilletsDisponible();
+    this.loadAllBillets();
   }
 
   filterBillets() {
     console.log("test listener");
-    this.filteredBillets = this.billets.filter((billet) => {
+    this.filteredBilletsDisponible = this.billetsDisponible.filter((billet) => {
       return (this.selectedSport ? billet.sport === this.selectedSport : true) &&
              (this.selectedCity ? billet.localisation === this.selectedCity : true);
       // Add des autres filtres 
@@ -84,7 +101,7 @@ export class AdminComponent {
             next: (response) => {
               console.log('Billet créé', response);
               this.billetForm.reset({ statut: BilletStatut.IN_SOLD }); 
-              this.loadBillets();
+              this.loadBilletsDisponible();
             },
             error: (error) => console.error('Erreur lors de la création', error)
           });
@@ -94,7 +111,7 @@ export class AdminComponent {
   }
 
   deactivateBillet(billet: BilletDisponible) {
-      const found = this.billets.find(b => b.id === billet.id);
+      const found = this.billetsDisponible.find(b => b.id === billet.id);
       if (found) {
           found.statut = BilletStatut.DESACTIVED;
           console.log('Billet désactivé:', found);
@@ -102,15 +119,42 @@ export class AdminComponent {
   }
   updateBillet(billet: BilletDisponible): void {
     this.billetService.updateBilletDisponible(billet.id, billet).subscribe(() => {
-      this.loadBillets(); 
+      this.loadBilletsDisponible(); 
     });
   }
 
-  loadBillets(): void {
+  loadBilletsDisponible(): void {
     this.billetService.getBilletsDisponibles({}).subscribe(billets => {
-      this.billets = billets;
-      this.filteredBillets = this.billets;
-      console.log(this.billets);
+      this.billetsDisponible = billets;
+      this.filteredBilletsDisponible = this.billetsDisponible;
+      console.log(this.billetsDisponible);
+    });
+  }
+
+  loadAllBillets(): void {
+    this.billetsService.getAllBillets().subscribe({
+      next: (billets) => {
+        this.billets = billets;
+        this.calculPrixTotal(this.billets);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des billets:', error);
+      }
+    });
+  }
+
+  calculPrixTotal(billets: Billet[]){
+    billets.forEach(element => {
+        this.prixTotalBilletVendu += element.prix;
+        if(element.category === "SOLO"){
+          this.nbBilletSolo ++;
+        }
+        if(element.category === "DUO"){
+          this.nbBilletDuo ++;
+        }
+        if(element.category === "FAMILLE"){
+          this.nbBilletFamille ++;
+        }
     });
   }
 }

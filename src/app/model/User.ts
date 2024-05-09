@@ -1,43 +1,45 @@
-import { Adress } from './Adress';
-import { DataBank } from './DataBank';
 import { Billet } from './Billet';
+import { DataBank } from './DataBank';
+
 export class User {
     id: number;
-  userKey: string;
-  role: string;
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  favoriteSport: string;
-  isAccepteCGU: boolean= false;
-  wallet: Billet[];
-  dataBanks: DataBank | null;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    favouriteSport: string;
+    userKey: string;
+    dateCreated: Date;
+    birthdate: Date;
+    role: string;
+    isAccepteCGU: boolean;
+    billets: Billet[];
 
-  constructor(
-    id?: number,
-    userKey?: string,
-    role?: string,
-    firstName?: string,
-    lastName?: string,
-    username?: string,
-    password?: string,
-    birthDate?: Date,
-    favoriteSport?: string,
-    wallet?: Billet[],
-    adressFacturation?: Adress,
-    adressSending?: Adress,
-    dataBanks?: DataBank
-  ) {
-    this.id = id || 0;
-    this.userKey = userKey || '';
-    this.role = role || '';
-    this.firstName = firstName || '';
-    this.lastName = lastName || '';
-    this.username = username || '';
-    this.password = password || '';
-    this.favoriteSport = favoriteSport ||'';
-    this.wallet = wallet || [];
-    this.dataBanks = dataBanks || new DataBank();
-  }
+    constructor(
+        id: number = 0,
+        username: string = '',
+        password: string = '',
+        firstName: string = '',
+        lastName: string = '',
+        favouriteSport: string = '',
+        userKey: string = '',
+        dateCreated: Date = new Date(),
+        birthdate: Date = new Date(),
+        role: string = '',
+        isAccepteCGU: boolean = false,
+        billets: Billet[] = []
+    ) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.favouriteSport = favouriteSport;
+        this.userKey = userKey;
+        this.dateCreated = dateCreated;
+        this.birthdate = birthdate;
+        this.role = role;
+        this.isAccepteCGU = isAccepteCGU;
+        this.billets = billets;
+    }
 }

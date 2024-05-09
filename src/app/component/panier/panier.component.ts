@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UnsubscriptionError } from 'rxjs';
 import { Billet } from 'src/app/model/Billet';
 import { BilletDisponible } from 'src/app/model/BilletDisponibles';
 import { DataBank } from 'src/app/model/DataBank';
-import { Reservation } from 'src/app/model/Reservation';
+import { UserPaiementDTO } from 'src/app/model/UserPaiementDTO';
 import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login/login.service';
 import { PanierService } from 'src/app/services/panier/panier.service';
@@ -20,8 +21,8 @@ export class PanierComponent {
   dataBanks: DataBank = new DataBank();
   panier: BilletDisponible[] = [];
   totalPanier: number = 0;
-  reservation = new Reservation();
-  tickets: Billet[] = [];
+  billets: Billet[] = [];
+  userPaimentDTO: UserPaiementDTO = new UserPaiementDTO();
 
   constructor(
     private router:Router,
@@ -44,9 +45,6 @@ export class PanierComponent {
     if(this.loginService.isLoggedIn()){
       if (storedUserData) {
         this.user = storedUserData;
-        if(this.user.dataBanks){
-          this.dataBanks = this.user.dataBanks;
-        }
       }
     } else {
       this.router.navigate(['/connexion']);
@@ -81,16 +79,15 @@ export class PanierComponent {
   }
 
   validePanier() {
-    this.tickets = this.billetDispoToBillet.transformBilletsDisponiblesToBillets(JSON.parse(this.storageService.getItemWithExpiry('panier')))
-    console.log("dataBanks" + this.user.dataBanks);
-    this.reservation = new Reservation(
-      undefined,
+    this.billets = this.billetDispoToBillet.transformBilletsDisponiblesToBillets(JSON.parse(this.storageService.getItemWithExpiry('panier')))
+    this.user = JSON.parse(this.storageService.getItemWithExpiry('user'));
+    this.user.billets = this.billets;
+    console.log("user" + this.user);
+    this.userPaimentDTO = new UserPaiementDTO(
       this.user,
-      this.tickets,
-      new Date(),
-      true
+      this.dataBanks
     );
-    this.panierService.createReservation(this.reservation).subscribe({
+    this.panierService.createReservation(this.userPaimentDTO).subscribe({
       next: (res) => {
         alert('Réservation créée avec succès!');
       },

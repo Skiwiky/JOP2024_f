@@ -16,7 +16,6 @@ export class HomeComponent {
   seconds: number;
   evenement: string = 'Olympiques';
 
-  yourData = 'Voici le contenu du QR Code';
   
   constructor(private storageService: StorageService) {
     this.jour = 0;
@@ -56,5 +55,9 @@ export class HomeComponent {
         console.log('Les Jeux ${this.evenement} de Paris 2024 ont commencé !');
       }
     }, 1000);
+  }
+
+  redirectToOfficialSite(): void {
+    window.location.href = 'https://www.paris2024.org'; 
   }
 }

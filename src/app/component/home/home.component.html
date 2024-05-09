@@ -12,6 +12,52 @@
         <div>grand les</div>
         <div>Jeux</div>
     </div>
-    <qrcode [qrdata]="yourData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+    <div class="presentation">
+        <h2>Ceci est un titre</h2>
+        <p>Les Jeux Olympiques de Paris 2024 marquent le grand retour des Jeux en France, un siècle après les derniers Jeux d'été à Paris en 1924. Cet événement mondial célèbre l'excellence sportive et l'unité, avec des compétitions se déroulant dans des
+            sites emblématiques tels que la Seine, le Stade de France et les Champs-Élysées. Paris 2024 promet d'être une édition innovante et durable, mettant en avant la beauté culturelle de la ville et son engagement envers l'environnement. Rejoignez-nous
+            pour célébrer l'esprit olympique dans la Ville Lumière !
+        </p>
+        <div>
+            <button class="btn btn-primary" routerLink="/boutique">Voir la boutique</button>
+            <button class="btn btn-secondary" (click)="redirectToOfficialSite()">En découvrir +</button>
+        </div>
+    </div>
+    <div class="seine">
+        <div>
+            <img src="./../../../assets/img/seine-natation.png">
+        </div>
+        <div>
+            <h3 class="seine-titre">Paris est une fête... et la Seine son ruban</h3>
+            <span class="seine-titre-auteur">Ernest Hemingway</span>
+            <p></p>
+            <p>Dans un tournant historique pour les Jeux Olympiques, les épreuves de natation en eau libre des Jeux de Paris 2024 se dérouleront dans un cadre spectaculaire et emblématique : la Seine. Ce choix marque une première dans l'histoire des Jeux
+                et symbolise un engagement profond envers l'innovation et le respect de l'environnement. Les organisateurs des Jeux de Paris 2024 ont choisi de mettre en avant le patrimoine naturel et culturel de la ville, transformant la Seine, ce fleuve
+                historiquement central dans la vie des Parisiens, en une arène olympique à ciel ouvert.
+            </p>
+
+            <p> Cette décision s'accompagne d'une signification particulière, car elle reflète non seulement l'ambition de Paris de renouer avec son fleuve, mais aussi celle de promouvoir une vision plus durable des Jeux Olympiques. L'intégration de la Seine
+                comme site des compétitions illustre parfaitement la devise de ces jeux, "Venir ensemble pour partager l'avenir", mettant l'accent sur la communauté, l'accessibilité et l'écologie. Pour les athlètes comme pour les spectateurs, cette expérience
+                promet d'être inoubliable, offrant une toile de fond majestueuse et chargée d'histoire pour des performances sportives de haut niveau.
+            </p>
+            <p>Alors que le monde entier aura les yeux rivés sur la Seine en 2024, cet événement ne manquera pas de s'inscrire comme un chapitre mémorable dans l'annuaire des Jeux Olympiques, célébrant le sport dans un esprit de festivité et d'excellence
+                environnementale. La Seine, autrefois artère vitale de la ville pour le transport et le commerce, deviendra ainsi le cœur battant des Jeux, soulignant l'harmonie entre Paris, son histoire, et le futur des compétitions internationales.</p>
+        </div>
+    </div>
+    <div class="femmeJo">
+        <div>
+            <h3 class="femme-titre">L'égalité des sexes est votre problème à tous.</h3>
+            <span class="femme-titre-auteur">Emma Watson</span>
+            <p>Les Jeux Olympiques de Paris 1924 représentaient une époque où la participation féminine était extrêmement limitée, avec seulement 2% des athlètes étant des femmes.</p>
+            <p>Cependant, les Jeux Olympiques de Paris 2024 marquent un tournant historique dans l'égalité des genres, avec une parité exemplaire atteinte : 50% des athlètes seront des femmes. Cette évolution spectaculaire témoigne de l'engagement continu
+                du Comité International Olympique et des organisateurs des Jeux à promouvoir l'égalité des sexes dans le sport.</p>
+            <p>Cette progression n’est pas seulement un chiffre, mais un symbole puissant de l’avancement des droits des femmes et de l’égalité dans le sport à travers les décennies. Les Jeux de Paris 2024 se distinguent ainsi non seulement par leur cadre
+                historique et emblématique, mais aussi par leur célébration de la diversité et de l'inclusion, illustrant comment le sport peut être un vecteur de changement social positif.</p>
+            <p>Avec une représentation égale des athlètes féminins et masculins, Paris 2024 incarne un idéal d'inclusivité, inspirant les générations futures à poursuivre l'équité dans tous les domaines de la société.</p>
+
+        </div>
+        <div> <img src="./../../../assets/img/femme.png"></div>
+    </div>
     <app-footer></app-footer>
 </div>

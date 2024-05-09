@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { Reservation } from 'src/app/model/Reservation';
+import { UserPaiementDTO } from 'src/app/model/UserPaiementDTO';
 import { StorageService } from '../storage/storage.service';
+import { User } from 'src/app/model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class PanierService {
 
   constructor(private http: HttpClient,private storageService: StorageService) { }
 
-  createReservation(reservation: Reservation): Observable<Reservation> {
-    console.log("on est dans le service de reservation");
-    return this.http.post<Reservation>(this.apiUrl, reservation, { headers: this.getAuthHeaders() }).pipe(
+  createReservation(userPaiementDTO: UserPaiementDTO): Observable<User> {
+    console.log("on est dans le service de reservation:", JSON.stringify(userPaiementDTO, null, 2));
+
+    return this.http.post<User>(this.apiUrl, userPaiementDTO, { headers: this.getAuthHeaders() }).pipe(
       tap(response => {
         console.log("Création réussie", response);
       }),
@@ -29,7 +31,7 @@ export class PanierService {
    // Obtenir les en-têtes d'authentification
    private getAuthHeaders(): HttpHeaders  {
     const tokenJSON = this.storageService.getItemWithExpiry('authToken');
-    console.log('tokenJSON: '+tokenJSON);
+    console.log('tokenJSON: '+ tokenJSON);
     
     return  new HttpHeaders({
         'Content-Type': 'application/json',

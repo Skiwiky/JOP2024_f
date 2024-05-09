@@ -27,25 +27,22 @@
             </div>
             <div>
                 <label for="favouriteSport">Sport favori:</label>
-                <select name="sports" id="favouriteSport" [(ngModel)]="user.favoriteSport">
+                <select name="sports" id="favouriteSport" [(ngModel)]="user.favouriteSport">
                     <option *ngFor="let sport of listSport" [value]="sport.id">{{ sport.nomComplet }}</option>
                 </select>
             </div>
-
-        </div>
-
-        <div class="bloc-partie">
-            <app-bank-bloc [dataBank]="user.dataBanks" (addDataBank)="addDataBank()" (deleteDataBank)="deleteDataBank()"> </app-bank-bloc>
         </div>
 
         <div class="bloc-partie">
             <h3>Vos billets</h3>
             <hr>
-            <div *ngIf="user.wallet && user.wallet.length> 0">
+            <div *ngIf="user.billets && user.billets.length> 0">
                 <!-- Affichage de la liste des billets -->
-                <div *ngFor="let billet of user.wallet">
-                    <input type="text" [(ngModel)]="billet.sport" placeholder="Sport">
+                <div *ngFor="let billet of user.billets">
+                    <h3>{{ billet.sport }}</h3>
+                    {{billet.reservatioKey}}
                     <!-- Ajoutez les autres champs ici -->
+                    <qrcode [qrdata]="billet.reservatioKey" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                 </div>
             </div>
         </div>

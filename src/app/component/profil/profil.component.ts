@@ -50,11 +50,6 @@ export class ProfilComponent {
       this.redirectToLogin();
       return;
     }
-    if (this.user.dataBanks) {
-      this.user.dataBanks.dataSaved = true;
-    } 
-
-    console.log(`Update user: ${JSON.stringify(this.user)}`);
     
     const userId = Number(this.storageService.getItemWithExpiry('idUser'));
     this.userService.updateUser(userId, this.user).subscribe({
@@ -64,27 +59,17 @@ export class ProfilComponent {
       },
       error: (error) => {
         this.showAlert = true;
-    if (error.status === 404) {
-        this.alertMessage = 'Utilisateur non trouvé.';
-    } else {
-        this.alertMessage = 'Une erreur est survenue lors de la mise à jour du profil.';
-    }
+        if (error.status === 404) {
+            this.alertMessage = 'Utilisateur non trouvé.';
+        } else {
+            this.alertMessage = 'Une erreur est survenue lors de la mise à jour du profil.';
+        }
       }
     });
   }
 
   deleteUser(){
     console.log("suppression du User");
-  }
-
-  addDataBank() {
-      if (!this.user.dataBanks) {
-          this.user.dataBanks = new DataBank();
-      }
-  }
-
-  deleteDataBank() {
-      this.user.dataBanks = null;
   }
 
   onFieldChange() {

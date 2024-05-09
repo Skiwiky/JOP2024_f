@@ -14,7 +14,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { AuthInterceptor } from './interceptor/error/auth.interceptor';
 import { TokenResfreshInterceptor } from './interceptor/tokenRefresh/token-resfresh.interceptor';
-import { AddressBlocComponent } from './component/profil/address-bloc/address-bloc.component';
 import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.component';
 import { CGUComponent } from './component/cgu/cgu.component';
 import { PanierComponent } from './component/panier/panier.component';
@@ -30,7 +29,6 @@ import { QRCodeModule } from 'angularx-qrcode';
     HeaderComponent,
     FooterComponent,
     AdminComponent,
-    AddressBlocComponent,
     BankBlocComponent,
     CGUComponent,
     PanierComponent

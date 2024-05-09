@@ -31,3 +31,95 @@
     color: white;
     font-weight: 800;
 }
+
+
+/*css du bloc de la seine*/
+
+.seine {
+    background-color: #e5ddbd;
+    display: flex;
+    align-items: center;
+}
+
+.seine>div:first-child {
+    flex: 0 0 40%;
+    text-align: center;
+}
+
+.seine>div:first-child img {
+    width: 100%;
+    height: auto;
+}
+
+.seine>div:last-child {
+    flex: 0 0 60%;
+    padding: 20px;
+}
+
+.seine-titre,
+.femme-titre {
+    font-family: "Paris";
+    font-style: italic;
+    font-weight: 800;
+}
+
+.seine-titre-auteur,
+.femme-titre-auteur {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+
+/*Bloc présentation*/
+
+.presentation {
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.btn-primary,
+.btn-secondary {
+    border-radius: 100px;
+    margin: 1%;
+}
+
+
+/*css femme*/
+
+.femmeJo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.femmeJo>div:first-child {
+    flex: 0 0 60%;
+    padding: 20px;
+}
+
+.femmeJo>div:last-child {
+    flex: 0 0 40%;
+    text-align: center;
+}
+
+.femmeJo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.femme-titre {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.femme-titre-auteur {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #555;
+}
