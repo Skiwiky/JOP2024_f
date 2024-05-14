@@ -7,21 +7,19 @@
             <div *ngIf="user.favouriteSport">
                 <h2>Votre sport favori</h2>
                 <div class="billet-container">
-                    <ng-container *ngFor="let billet of filteredBillets">
-                        <div class="billet-card" *ngIf="billet.sport === user.favouriteSport">
-                            <div class="card-header">
+                    <ng-container *ngFor="let billet of filteredBillets" class="billet-card" [style.backgroundImage]="'url(./assets/img/sport/' + billet.sport + '.jpg)'">
+                        <div class="billet-card" *ngIf="billet.sport === user.favouriteSport" [style.backgroundImage]="'url(./assets/img/sport/' + billet.sport + '.jpg)'">
+                            <div class="card-content">
                                 <div class="city-date">
-                                    <span class="city">{{ billet.localisation }}</span>
-                                    <span class="date">{{ billet.dateEvent | date: 'mediumDate' }}</span>
+                                    <span class="city"><strong>Lieu:</strong> {{ billet.localisation }}</span><br>
+                                    <span class="date"><strong>Date:</strong> {{ billet.dateEvent | date: 'mediumDate' }}</span>
                                 </div>
-                                <div class="category">{{ billet.category }}</div>
-                            </div>
-                            <div class="card-body">
-                                <span class="sport">{{ billet.sport }}</span>
+                                <div class="category"><strong>Catégorie:</strong> {{ billet.category }}</div>
+                                <div class="sport"><strong>Sport:</strong> {{ billet.sport }}</div>
+                                <div class="price"><strong>Prix:</strong> {{ billet.prix }} €</div>
                             </div>
                             <div class="card-footer">
                                 <button class="add-to-cart material-symbols-outlined" (click)="addToCart(billet)">add</button>
-                                <div class="price">{{ billet.prix }} €</div>
                             </div>
                         </div>
                     </ng-container>
@@ -45,22 +43,22 @@
                 <button (click)="resetFilters()" class="btn btn-primary">Réinitialiser les filtres</button>
             </div>
             <div class="billet-container">
-                <div *ngFor="let billet of displayedBillets" class="billet-card">
-                    <div class="card-header">
+                <div *ngFor="let billet of displayedBillets" class="billet-card" [style.backgroundImage]="'url(./assets/img/sport/' + billet.sport + '.jpg)'">
+                    <div class="card-content">
                         <div class="city-date">
-                            <span class="city">{{ billet.localisation }}</span>
-                            <span class="date">{{ billet.dateEvent | date: 'mediumDate' }}</span>
+                            <span class="city"><strong>Lieu:</strong> {{ billet.localisation }}</span><br>
+                            <span class="date"><strong>Date:</strong> {{ billet.dateEvent | date: 'mediumDate' }}</span>
                         </div>
-                        <div class="category">{{ billet.category }}</div>
-                    </div>
-                    <div class="card-body">
-                        <span class="sport">{{ billet.sport }}</span>
+                        <div class="category"><strong>Catégorie:</strong> {{ billet.category }}</div>
+                        <div class="sport"><strong>Sport:</strong> {{ billet.sport }}</div>
+                        <div class="price"><strong>Prix:</strong> {{ billet.prix }} €</div>
                     </div>
                     <div class="card-footer">
                         <button class="add-to-cart material-symbols-outlined" (click)="addToCart(billet)">add</button>
-                        <div class="price">{{ billet.prix }} €</div>
                     </div>
                 </div>
+                <button *ngIf="filteredBillets.length > maxItemsToShow" (click)="loadMoreBillets()">Afficher plus</button>
+
                 <button *ngIf="filteredBillets.length > maxItemsToShow" (click)="loadMoreBillets()">Afficher plus</button>
             </div>
         </div>

@@ -5,7 +5,6 @@ import { UserCreation } from 'src/app/model/UserCreation';
 import { User } from 'src/app/model/User';
 import { LoginRequest } from 'src/app/model/LoginRequest';
 import { StorageService } from '../storage/storage.service';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -13,12 +12,26 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
 
-  private apiUrl = 'http://localhost:8080/auth'; // L'URL de votre API Java
-  private user: User = new User;
+ /* private apiUrl = 'http://localhost:8080/auth';*/
+  private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/auth';
+  private user: User = new User();
   private isAuthenticated = false;
 
-  constructor(private http: HttpClient,private storageService: StorageService, private router:Router) { }
-  
+  constructor(private http: HttpClient, private storageService: StorageService, private router: Router) { 
+    this.initializeAuthState();
+  }
+
+  initializeAuthState(): void {
+    const token = this.storageService.getItemWithExpiry('authToken');
+    const storedUser = this.storageService.getItemWithExpiry('user');
+    if (token && storedUser) {
+      this.user = JSON.parse(storedUser);
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
+    }
+  }
+
   signin(loginRequest: LoginRequest): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/signin`, loginRequest).pipe(
       tap(response => {
@@ -30,11 +43,7 @@ export class LoginService {
               if (response.user.id) {
                   this.storageService.setItemWithExpiry('idUser', response.user.id.toString(), 604800000); 
               }
-              const storedUser = this.storageService.getItemWithExpiry('user');
-              if (storedUser) {
-                  console.log('affichage user', JSON.parse(storedUser)); 
-              }
-
+              this.user = response.user;
               this.isAuthenticated = true;
               this.router.navigate(['/home']);
           } else {
@@ -45,7 +54,7 @@ export class LoginService {
           console.error('Erreur lors de la connexion', error);
           return throwError(() => new Error('Une erreur est survenue lors de la tentative de connexion.'));
       })
-  );
+    );
   }
 
   signup(user: UserCreation): Observable<any> {
@@ -55,30 +64,31 @@ export class LoginService {
       })
     );
   }
- 
+
   logout() {
     this.storageService.clear();
     this.isAuthenticated = false;
     this.clearUser();
+    this.router.navigate(['/connexion']);
   }
 
   clearUser() {
-   // effacer l'utilisateur
+    this.user = new User();
   }
 
-  getUser(){
+  getUser(): User {
     return this.user;
   }
 
-  setUser(user: User){
+  setUser(user: User): void {
     this.user = user;
   }
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
-  
-  getUserRole() {
+
+  getUserRole(): string {
     return this.user.role;  
   }
 

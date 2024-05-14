@@ -1,3 +1,5 @@
+/* Structure générale */
+
 .body {
     display: flex;
     flex-direction: column;
@@ -7,8 +9,8 @@
 .main-content {
     display: flex;
     flex-grow: 1;
-    /* Permet aux colonnes de prendre tout l'espace disponible */
     margin: 20px;
+    flex-wrap: wrap;
 }
 
 .left-column {
@@ -25,7 +27,12 @@
     border-radius: 10px;
     margin-left: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    order: -1;
+    /* Placer par défaut avant la colonne de gauche sur les petits écrans */
 }
+
+
+/* Billet container */
 
 .billet-container {
     display: grid;
@@ -34,42 +41,39 @@
     margin-top: 20px;
 }
 
+
+/* Billet card */
+
 .billet-card {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000;
+}
+
+.card-content {
+    background: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 300px;
-}
-
-.filter-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.select-wrapper {
-    margin-right: 10px;
-}
-
-.billet-card {
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 300px;
-    width: 300px;
-    overflow: hidden;
-    background-color: #A2F4FA;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    z-index: 2;
+    max-width: 80%;
 }
 
 .card-header {
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .card-header .city-date {
@@ -98,14 +102,21 @@
 
 .card-footer {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
+    justify-content: flex-end;
+    padding: 10px;
 }
 
 .add-to-cart {
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
 }
 
 .price {
@@ -114,8 +125,116 @@
     color: #333;
 }
 
+
+/* Filtres */
+
+.filter-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-div .select-wrapper,
+.filter-div .reset-button {
+    margin-bottom: 10px;
+}
+
+.select-wrapper {
+    margin-right: 10px;
+}
+
 .select-filter {
-    width: 300px;
-    margin-left: 1%;
-    margin-right: 1%;
+    width: 100%;
+    max-width: 300px;
+}
+
+
+/* Boutons */
+
+button {
+    border-radius: 100px;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1200px) {
+    .left-column,
+    .right-column {
+        flex: 1 1 100%;
+        margin-left: 0;
+    }
+    .right-column {
+        margin-top: 0;
+        order: -1;
+    }
+    .billet-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .right-column {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    .billet-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card-content {
+        max-width: 100%;
+    }
+    .filter-div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filter-div .select-wrapper,
+    .filter-div .reset-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .filter-div .reset-button {
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .right-column {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    .billet-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .billet-card {
+        margin: 5px 0;
+    }
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: 5px;
+    }
+    .add-to-cart {
+        padding: 3px 5px;
+    }
+    .price {
+        font-size: 1.2rem;
+    }
+    .filter-div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filter-div .select-wrapper,
+    .filter-div .reset-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .filter-div .reset-button {
+        align-self: center;
+    }
 }

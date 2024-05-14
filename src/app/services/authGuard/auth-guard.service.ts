@@ -17,27 +17,28 @@ export class AuthGuardService implements CanActivate {
   }
 
   private checkLogin(route: ActivatedRouteSnapshot, url: string): boolean {
-    
+    this.loginService.initializeAuthState(); // Initialize auth state
+
     if (this.loginService.isLoggedIn()) {
       const userJson = this.storageService.getItemWithExpiry('user');
       if (!userJson) {
         this.router.navigate(['/connexion']);
         return false;
       }
-  
+
       const user = JSON.parse(userJson);
       const userRole = user ? user.role : null;
       console.log('UserRole inside checkLogin:', userRole);
       const roles = route.data['roles'] as Array<string>;
       console.log('Required roles:', roles);
-      console.log("roles:"+ userRole )
+      console.log("roles:" + userRole)
       if (roles && roles.indexOf(userRole) === -1) {
-        
         this.router.navigate(['/home']);
         return false;
       }
       return true;
     } else {
+      console.log("on va vers la page de co");
       this.router.navigate(['/connexion'], { queryParams: { returnUrl: url } });
       return false;
     }

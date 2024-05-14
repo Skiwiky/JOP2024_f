@@ -9,7 +9,8 @@ import { StorageService } from '../storage/storage.service';
 })
 export class BilletDisponibleService {
 
-  private apiUrl = 'http://localhost:8080/billetsDisponble/v1'
+ /* private apiUrl = 'http://localhost:8080/billetsDisponble/v1'*/
+  private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/billetsDisponble/v1'
   constructor(private http: HttpClient, private storageService: StorageService) {}
 
   getBilletDisponible(id: number): Observable<BilletDisponible> {

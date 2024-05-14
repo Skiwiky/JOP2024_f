@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/User';
-import { AuthGuardService } from 'src/app/services/authGuard/auth-guard.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
@@ -10,25 +9,34 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   urlLogoJO: string = '../../../assets/img/Logo_JO24.svg';
   urlLogoJP: string = '../../../assets/img/Logo_JP24.svg';
   logoAffiche: string;
   evenement: string = 'Olympiques';
   isUserLogged: boolean = false;
-  user: User;
+  user: User = new User(0, '', '', '', '', '', '');
 
-  constructor(public loginService: LoginService, private storageService:StorageService, private router: Router) {
-    
+  constructor(
+    public loginService: LoginService,
+    private storageService: StorageService,
+    private router: Router
+  ) {
     this.storageService.cleanExpiredLocalStorageItems();
     this.logoAffiche = this.urlLogoJO;
-    this.user = new User(0,'','','','','','');
   }
 
   ngOnInit(): void {
-    this.isUserLogged = this.loginService.isLoggedIn();
-    this.user = JSON.parse(this.storageService.getItemWithExpiry('user'));
+    const userData = this.storageService.getItemWithExpiry('user');
+    if (userData) {
+      this.user = JSON.parse(userData);
+      this.isUserLogged = true;
+    } else {
+      this.isUserLogged = false;
+    }
     console.log(this.user);
+
+    // Alternance des logos
     setInterval(() => {
       if (this.evenement === 'Olympiques') {
         this.logoAffiche = this.urlLogoJP;
@@ -37,17 +45,17 @@ export class HeaderComponent {
         this.logoAffiche = this.urlLogoJO;
         this.evenement = 'Olympiques';
       }
-    }, 10000); 
+    }, 10000);
   }
-
 
   logout() {
     this.loginService.logout();
     this.router.navigate(['/connexion']);
-    this.isUserLogged= false;
-  }
-  goHome(){
-    this.router.navigate(['/']);
+    this.isUserLogged = false;
+    this.user = new User(0, '', '', '', '', '', '');
   }
 
+  goHome() {
+    this.router.navigate(['/']);
+  }
 }

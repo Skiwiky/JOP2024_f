@@ -9,13 +9,13 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/boutique" aria-current="page">Boutique</a>
                 </li>
-                <li class="nav-item" *ngIf="!loginService.isLoggedIn()">
+                <li class="nav-item" *ngIf="!isUserLogged">
                     <a class="nav-link" routerLink="/connexion" aria-current="page">Connexion</a>
                 </li>
-                <li class="nav-item dropdown" *ngIf="loginService.isLoggedIn()">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="material-symbols-outlined">
-                        account_circle
-                        </span></a>
+                <li class="nav-item dropdown" *ngIf="isUserLogged">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <span class="material-symbols-outlined">account_circle</span>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" routerLink="/profil">Profil</a></li>
                         <li><a class="dropdown-item" routerLink="/panier">Panier</a></li>
@@ -25,6 +25,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
 </nav>

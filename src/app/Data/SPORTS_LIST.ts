@@ -4,7 +4,6 @@ export interface Sport {
   }
   
 export const SPORTS_LIST : Sport[]= [
-    { id: 'VIDE', nomComplet: "Choisir un sport" },
     { id: 'ATHLETISME', nomComplet: "l'athlétisme" },
     { id: 'AVIRON', nomComplet: "l'aviron" },
     { id: 'BADMINTON', nomComplet: "le badminton" },

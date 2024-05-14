@@ -68,3 +68,100 @@ select {
     justify-content: space-between;
     align-items: center;
 }
+
+
+/*CSS liste billet */
+
+
+/* Bloc principal des billets */
+
+.bloc-partie {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+
+/* Titre principal */
+
+.bloc-partie h3 {
+    text-align: center;
+    color: #333;
+}
+
+
+/* Ligne de séparation */
+
+.bloc-partie hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 10px 0;
+}
+
+.billet-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.billet-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.billet-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.billet-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.billet-card qrcode {
+    margin-top: 10px;
+}
+
+.modal {
+    text-align: center;
+}
+
+.look {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.look:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.look .material-symbols-outlined {
+    font-size: 24px;
+}
+
+
+/*************************************************** */
