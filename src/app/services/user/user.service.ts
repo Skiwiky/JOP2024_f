@@ -10,8 +10,8 @@ import { StorageService } from '../storage/storage.service';
 })
 export class UserService {
   
- /* private apiUrl = 'http://localhost:8080/users/v1';*/
-  private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/users/v1';
+ private apiUrl = 'http://localhost:8080/users/v1';
+ /* private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/users/v1';*/
   
   private httpOptions = {
     headers: new HttpHeaders({

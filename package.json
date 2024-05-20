@@ -1,7 +1,6 @@
 {
     "name": "jop2024-f",
     "version": "1.0.0",
-    "main": "server.js",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

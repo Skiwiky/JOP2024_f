@@ -40,7 +40,7 @@
                 <label for="sportSelect" class="form-label">Filtrer par sport:</label>
                 <select id="sportSelect" class="form-select" [(ngModel)]="selectedSport" (change)="filterBillets()">
                     <option value="">Tous les sports</option>
-                    <option *ngFor="let sport of listSport" [value]="sport">{{ sport }}</option>
+                    <option *ngFor="let sport of listSport" [value]="sport">{{ sport.id }}</option>
                 </select>
             </div>
             <hr>
@@ -54,7 +54,7 @@
                         <p><strong>Prix:</strong> {{ billet.prix }} €</p>
                         <p><strong>Date d'achat:</strong> {{ billet.dateAchat | date: 'mediumDate' }}</p>
                         <p><strong>Clé de réservation:</strong> {{ billet.reservatioKey }}</p>
-                        <qrcode [qrdata]="billet.reservatioKey" [width]="128" [errorCorrectionLevel]="'M'"></qrcode>
+                        <qrcode [qrdata]="billet.reservatioKey" [width]="128" [errorCorrectionLevel]="'M'" (qrCodeScanned)="onQrCodeScanned($event)"></qrcode>
                     </div>
                     <div class="look">
                         <span class="material-symbols-outlined">visibility</span>
@@ -82,33 +82,10 @@
                         <p><strong>Date d'achat:</strong> {{ selectedBillet?.dateAchat | date: 'mediumDate' }}</p>
                         <p><strong>Clé de réservation:</strong> {{ selectedBillet?.reservatioKey }}</p>
                         <div class="d-flex justify-content-center">
-                            <qrcode [qrdata]="selectedBillet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                            <qrcode [qrdata]="selectedBillet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'" (qrCodeScanned)="onQrCodeScanned($event)"></qrcode>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Fermer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Bootstrap -->
-        <div class="modal fade" id="billetModal" tabindex="-1" aria-labelledby="billetModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="billetModalLabel">{{ selectedBillet?.sport }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Localisation:</strong> {{ selectedBillet?.localisation }}</p>
-                        <p><strong>Date de l'événement:</strong> {{ selectedBillet?.dateEvent | date: 'mediumDate' }}</p>
-                        <p><strong>Catégorie:</strong> {{ selectedBillet?.category }}</p>
-                        <p><strong>Prix:</strong> {{ selectedBillet?.prix }} €</p>
-                        <p><strong>Date d'achat:</strong> {{ selectedBillet?.dateAchat | date: 'mediumDate' }}</p>
-                        <qrcode [qrdata]="selectedBillet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-                    </div>
-                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Fermer</button>
                     </div>
                 </div>

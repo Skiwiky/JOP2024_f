@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserCreation } from 'src/app/model/UserCreation';
@@ -32,6 +32,9 @@ export class LoginComponent {
   alertMessage: string = '';
   alertType: string = 'success';
 
+  isFooterSticky: boolean = false;
+
+
   constructor(private fb: FormBuilder,
     private loginService: LoginService, 
     private router:Router,
@@ -61,6 +64,9 @@ export class LoginComponent {
     });
    }
 
+   ngOnInit() {
+     this.checkContentHeight();
+   }
   signin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
@@ -69,9 +75,9 @@ export class LoginComponent {
         .subscribe({
           next: (response) => {
             console.log('Connexion réussie', response);
-            /*this.storageService.setItem('authToken', response.token);
-            this.storageService.setItem('user', JSON.stringify(response.user));
-            this.storageService.setItem('idUser', response.user.id);*/
+            this.storageService.setItemWithExpiry('authToken', response.token, 3600000);
+            this.storageService.setItemWithExpiry('user', JSON.stringify(response.user), 604800000);
+            this.storageService.setItemWithExpiry('idUser', response.user.id, 604800000);
             this.router.navigate(['/profil']); 
           },
           error: (error) => {
@@ -131,5 +137,48 @@ export class LoginComponent {
 
   toggleForm() {
     this.isLoginFormVisible = !this.isLoginFormVisible;
+  }
+  
+   // Méthode de validation du mot de passe
+   passwordStrengthValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null; // if there's no value, there's no error
+      }
+
+      const hasUpperCase = /[A-Z]+/.test(value);
+      const hasLowerCase = /[a-z]+/.test(value);
+      const hasNumeric = /[0-9]+/.test(value);
+      const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
+      const hasMinimumLength = value.length >= 8;
+
+      const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialCharacter && hasMinimumLength;
+
+      if (!passwordValid) {
+        return {
+          passwordStrength: {
+            hasUpperCase: hasUpperCase,
+            hasLowerCase: hasLowerCase,
+            hasNumeric: hasNumeric,
+            hasSpecialCharacter: hasSpecialCharacter,
+            hasMinimumLength: hasMinimumLength
+          }
+        };
+      }
+
+      return null;
+    };
+  }
+
+  @HostListener('window:resize')
+  onWindowResize() {
+    this.checkContentHeight();
+  }
+
+  checkContentHeight() {
+    const contentHeight = document.getElementById('content')?.offsetHeight || 0;
+    this.isFooterSticky = contentHeight < 900;
   }
 }

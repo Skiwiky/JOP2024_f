@@ -10,8 +10,8 @@ import { User } from 'src/app/model/User';
 })
 export class PanierService {
 
- /* private apiUrl = 'http://localhost:8080/reservations';*/ 
-  private apiUrl = '  https://jo2024-7692bdc14032.herokuapp.com/reservations'; 
+ private apiUrl = 'http://localhost:8080/reservations';
+   /*private apiUrl = '  https://jo2024-7692bdc14032.herokuapp.com/reservations'; */ 
 
   constructor(private http: HttpClient,private storageService: StorageService) { }
 
@@ -27,6 +27,16 @@ export class PanierService {
           return throwError(() => new Error('Une erreur est survenue lors de la tentative de creation.'));
       })
   );
+  }
+
+  checkReservationKey(reservationKey: string): Observable<boolean> {
+    const url = `${this.apiUrl}/check/${reservationKey}`;
+    return this.http.get<boolean>(url, { headers: this.getAuthHeaders() }).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la vérification de la clé de réservation', error);
+        return throwError(() => new Error('Une erreur est survenue lors de la tentative de vérification.'));
+      })
+    );
   }
 
    // Obtenir les en-têtes d'authentification

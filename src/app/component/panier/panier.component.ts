@@ -29,7 +29,7 @@ export class PanierComponent {
     public loginService: LoginService, 
     private storageService: StorageService,
     private panierService: PanierService,
-  private billetDispoToBillet: BillerDispoToBilletService){
+    private billetDispoToBillet: BillerDispoToBilletService){
       this.storageService.cleanExpiredLocalStorageItems();
 
   }

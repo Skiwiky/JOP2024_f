@@ -47,4 +47,7 @@ import { QRCodeModule } from 'angularx-qrcode';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  
+ }

@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/jop2024-f",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -53,8 +53,12 @@
                 <div *ngIf="registerForm.get('newPassword')?.touched && registerForm.get('newPassword')?.errors?.['required']" class="errorRegister">
                     Mot de passe est requis.
                 </div>
-                <div *ngIf="registerForm.get('newPassword')?.dirty && registerForm.get('newPassword')?.errors?.['minLength']" class="errorRegister">
-                    Le mot de passe doit comporter au moins {{ registerForm.get('newPassword')?.errors?.['minLength']?.requiredLength }} caractères.
+                <div *ngIf="registerForm.get('newPassword')?.dirty && registerForm.get('newPassword')?.errors?.['passwordStrength']" class="errorRegister">
+                    <div *ngIf="!registerForm.get('newPassword')?.errors?.['passwordStrength'].hasUpperCase">Le mot de passe doit contenir au moins une majuscule.</div>
+                    <div *ngIf="!registerForm.get('newPassword')?.errors?.['passwordStrength'].hasLowerCase">Le mot de passe doit contenir au moins une minuscule.</div>
+                    <div *ngIf="!registerForm.get('newPassword')?.errors?.['passwordStrength'].hasNumeric">Le mot de passe doit contenir au moins un chiffre.</div>
+                    <div *ngIf="!registerForm.get('newPassword')?.errors?.['passwordStrength'].hasSpecialCharacter">Le mot de passe doit contenir au moins un caractère spécial.</div>
+                    <div *ngIf="!registerForm.get('newPassword')?.errors?.['passwordStrength'].hasMinimumLength">Le mot de passe doit comporter au moins 8 caractères.</div>
                 </div>
             </div>
             <div>
@@ -81,4 +85,4 @@
         </form>
     </div>
 </div>
-<app-footer></app-footer>
+<app-footer [class.sticky-footer]="isFooterSticky"></app-footer>

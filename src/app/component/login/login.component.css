@@ -112,3 +112,9 @@ body {
 .checkCgu {
     margin-top: 15px;
 }
+
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

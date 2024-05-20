@@ -6,6 +6,8 @@ import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login/login.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { PanierComponent } from '../panier/panier.component';
+import { PanierService } from 'src/app/services/panier/panier.service';
 
 @Component({
   selector: 'app-profil',
@@ -29,7 +31,8 @@ export class ProfilComponent implements OnInit {
     private userService: UserService,
     private loginService: LoginService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private panierService: PanierService
   ) {
     this.storageService.cleanExpiredLocalStorageItems();
   }
@@ -110,5 +113,29 @@ export class ProfilComponent implements OnInit {
         ? this.user.billets.filter(billet => billet.sport === this.selectedSport)
         : this.user.billets;
     }
+  }
+
+  onQrCodeScanned(event: any): void {
+    const reservationKey = event.data;
+    this.checkReservation(reservationKey);
+  }
+  
+  checkReservation(reservationKey: string): void {
+    this.panierService.checkReservationKey(reservationKey).subscribe({
+      next: (exists) => {
+        if (exists) {
+          this.alertMessage = 'La réservation est valide.';
+          this.showAlert = true;
+        } else {
+          this.alertMessage = 'La réservation est invalide.';
+          this.showAlert = true;
+        }
+      },
+      error: (error) => {
+        this.alertMessage = 'Erreur lors de la vérification de la réservation.';
+        this.showAlert = true;
+        console.error(error);
+      }
+    });
   }
 }
