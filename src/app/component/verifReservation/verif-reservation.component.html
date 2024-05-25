@@ -1,0 +1,6 @@
+<div class="container mt-5">
+    <div class="alert" [ngClass]="{'alert-success': isReservationValid, 'alert-danger': !isReservationValid}">
+        <p>{{ alertMessage }}</p>
+    </div>
+    <button class="btn btn-primary" (click)="goHome()">Retour à l'accueil</button>
+</div>

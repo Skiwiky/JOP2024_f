@@ -1,0 +1,13 @@
+.container {
+    text-align: center;
+}
+
+.alert {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 1em;
+    padding: 10px 20px;
+}

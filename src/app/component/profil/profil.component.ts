@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { PanierComponent } from '../panier/panier.component';
 import { PanierService } from 'src/app/services/panier/panier.service';
 
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -114,28 +115,10 @@ export class ProfilComponent implements OnInit {
         : this.user.billets;
     }
   }
-
-  onQrCodeScanned(event: any): void {
-    const reservationKey = event.data;
-    this.checkReservation(reservationKey);
-  }
   
-  checkReservation(reservationKey: string): void {
-    this.panierService.checkReservationKey(reservationKey).subscribe({
-      next: (exists) => {
-        if (exists) {
-          this.alertMessage = 'La réservation est valide.';
-          this.showAlert = true;
-        } else {
-          this.alertMessage = 'La réservation est invalide.';
-          this.showAlert = true;
-        }
-      },
-      error: (error) => {
-        this.alertMessage = 'Erreur lors de la vérification de la réservation.';
-        this.showAlert = true;
-        console.error(error);
-      }
-    });
+  getReservationUrl(reservationKey: string): string {
+    this.storageService.setItemWithExpiry('reservationKey', reservationKey, 600000);
+    this.router.navigate(['/reservation']);
+    return "ok";
   }
 }

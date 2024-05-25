@@ -18,6 +18,8 @@ import { BankBlocComponent } from './component/profil/bank-bloc/bank-bloc.compon
 import { CGUComponent } from './component/cgu/cgu.component';
 import { PanierComponent } from './component/panier/panier.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { VerifReservationComponent } from './component/verifReservation/verif-reservation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     AdminComponent,
     BankBlocComponent,
     CGUComponent,
-    PanierComponent
+    PanierComponent,
+    VerifReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReactiveFormsModule,
     FormsModule, 
     AppRoutingModule,
+    ZXingScannerModule,
     QRCodeModule
   ],
   providers: [

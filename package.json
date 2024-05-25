@@ -18,6 +18,7 @@
         "@angular/platform-browser": "^17.3.7",
         "@angular/platform-browser-dynamic": "^17.3.7",
         "@angular/router": "^17.3.7",
+        "@zxing/ngx-scanner": "^17.0.4",
         "angularx-qrcode": "^17.0.0",
         "bootstrap": "^5.3.3",
         "rxjs": "~7.8.0",

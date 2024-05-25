@@ -53,8 +53,9 @@
                         <p><strong>Catégorie:</strong> {{ billet.category }}</p>
                         <p><strong>Prix:</strong> {{ billet.prix }} €</p>
                         <p><strong>Date d'achat:</strong> {{ billet.dateAchat | date: 'mediumDate' }}</p>
-                        <p><strong>Clé de réservation:</strong> {{ billet.reservatioKey }}</p>
-                        <qrcode [qrdata]="billet.reservatioKey" [width]="128" [errorCorrectionLevel]="'M'" (qrCodeScanned)="onQrCodeScanned($event)"></qrcode>
+
+                        <qrcode [qrdata]="billet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
                     </div>
                     <div class="look">
                         <span class="material-symbols-outlined">visibility</span>
@@ -80,9 +81,10 @@
                         <p><strong>Catégorie:</strong> {{ selectedBillet?.category }}</p>
                         <p><strong>Prix:</strong> {{ selectedBillet?.prix }} €</p>
                         <p><strong>Date d'achat:</strong> {{ selectedBillet?.dateAchat | date: 'mediumDate' }}</p>
-                        <p><strong>Clé de réservation:</strong> {{ selectedBillet?.reservatioKey }}</p>
                         <div class="d-flex justify-content-center">
-                            <qrcode [qrdata]="selectedBillet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'" (qrCodeScanned)="onQrCodeScanned($event)"></qrcode>
+                            <div class="d-flex justify-content-center">
+                                <qrcode [qrdata]="selectedBillet?.reservatioKey || ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
