@@ -8,6 +8,7 @@ export class Billet {
   dateAchat: Date; 
   billetKey: string; 
   reservatioKey: string; 
+  shortKey: string;
 
   constructor(
       id: number = 0,
@@ -18,7 +19,8 @@ export class Billet {
       prix: number = 0,
       dateAchat: Date = new Date(),
       billetKey: string = '',
-      reservatioKey: string = ''
+      reservatioKey: string = '',
+      shortKey: string = ''
   ) {
       this.id = id;
       this.sport = sport;
@@ -29,5 +31,6 @@ export class Billet {
       this.dateAchat = dateAchat;
       this.billetKey = billetKey;
       this.reservatioKey = reservatioKey;
+      this.shortKey = shortKey;
   }
 }

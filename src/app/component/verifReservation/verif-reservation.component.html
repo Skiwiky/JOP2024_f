@@ -1,6 +1,11 @@
 <div class="container mt-5">
-    <div class="alert" [ngClass]="{'alert-success': isReservationValid, 'alert-danger': !isReservationValid}">
-        <p>{{ alertMessage }}</p>
+    <div class="form-group">
+        <label for="shortKeyInput">Entrez la clé courte</label>
+        <input type="text" id="shortKeyInput" [(ngModel)]="shortKey" class="form-control" placeholder="Entrez la clé courte">
     </div>
-    <button class="btn btn-primary" (click)="goHome()">Retour à l'accueil</button>
+    <button class="btn btn-primary mt-2" (click)="checkShortKey()">Vérifier la Réservation</button>
+
+    <div *ngIf="alertMessage" class="alert" [ngClass]="isReservationValid ? 'alert-success' : 'alert-danger'">
+        {{ alertMessage }}
+    </div>
 </div>
