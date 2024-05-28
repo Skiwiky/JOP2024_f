@@ -1,11 +1,32 @@
 <div class="container mt-5">
     <div class="form-group">
-        <label for="shortKeyInput">Entrez la clé courte</label>
-        <input type="text" id="shortKeyInput" [(ngModel)]="shortKey" class="form-control" placeholder="Entrez la clé courte">
+        <label for="shortKeyInput">Entrez la ShortKey</label>
+        <input type="text" id="shortKeyInput" [(ngModel)]="shortKey" class="form-control" placeholder="Entrez la clé courte" (focus)="onInputChange()">
     </div>
     <button class="btn btn-primary mt-2" (click)="checkShortKey()">Vérifier la Réservation</button>
 
-    <div *ngIf="alertMessage" class="alert" [ngClass]="isReservationValid ? 'alert-success' : 'alert-danger'">
+    <div *ngIf="isReservationValid" class="user-card">
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Favourite Sport:</strong> {{ user.favouriteSport }}</p>
+        <div *ngIf="user.billets.length > 0">
+            <h3>Billets:</h3>
+            <ul>
+                <li *ngFor="let billet of user.billets">
+                    <p><strong>Sport:</strong> {{ billet.sport }}</p>
+                    <p><strong>Localisation:</strong> {{ billet.localisation }}</p>
+                    <p><strong>Date:</strong> {{ billet.dateEvent | date }}</p>
+                    <p><strong>Category:</strong> {{ billet.category }}</p>
+                    <p><strong>Prix:</strong> {{ billet.prix | currency }}</p>
+                    <p><strong>Date d'Achat:</strong> {{ billet.dateAchat | date }}</p>
+                    <p><strong>Reservation Key:</strong> {{ billet.reservationKey }}</p>
+                    <p><strong>Short Key:</strong> {{ billet.shortKey }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div *ngIf="alertMessage && !isReservationValid" class="alert alert-danger mt-3">
         {{ alertMessage }}
     </div>
 </div>

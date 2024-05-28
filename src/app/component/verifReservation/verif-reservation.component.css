@@ -11,3 +11,30 @@ button {
     font-size: 1em;
     padding: 10px 20px;
 }
+
+.user-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: auto;
+    background-color: #f9f9f9;
+}
+
+.user-card h2 {
+    margin-top: 0;
+}
+
+.user-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-card li {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+.user-card li:last-child {
+    border-bottom: none;
+}

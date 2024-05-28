@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'admin', component:AdminComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] }},
   { path: 'cgu', component:CGUComponent},
   { path: 'panier', component: PanierComponent},
-  { path: 'reservation', component: VerifReservationComponent },
+  { path: 'reservation', component: VerifReservationComponent, canActivate: [AuthGuardService], data: { roles: ['ADMIN'] }}
 ];
 
 @NgModule({

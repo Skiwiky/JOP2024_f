@@ -163,5 +163,7 @@ select {
     font-size: 24px;
 }
 
-
-/*************************************************** */
+.shortKey {
+    font-size: 30px;
+    font-weight: 700;
+}

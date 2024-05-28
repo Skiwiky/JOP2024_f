@@ -55,6 +55,7 @@
                         <p><strong>Date d'achat:</strong> {{ billet.dateAchat | date: 'mediumDate' }}</p>
 
                         <qrcode [qrdata]="billet?.reservatioKey ?? ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                        <p class="shortKey">{{ billet.shortKey }}</p>
 
                     </div>
                     <div class="look">
@@ -86,6 +87,8 @@
                                 <qrcode [qrdata]="selectedBillet?.reservatioKey || ''" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                             </div>
                         </div>
+                        <p class="shortKey">{{ selectedBillet?.shortKey }}</p>
+
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Fermer</button>

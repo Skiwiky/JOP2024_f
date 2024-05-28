@@ -20,6 +20,7 @@
                         <li><a class="dropdown-item" routerLink="/profil">Profil</a></li>
                         <li><a class="dropdown-item" routerLink="/panier">Panier</a></li>
                         <li *ngIf="user && user.role === 'ADMIN'"><a class="dropdown-item" routerLink="/admin">Admin</a></li>
+                        <li *ngIf="user && user.role === 'ADMIN'"><a class="dropdown-item" routerLink="/reservation">Verification de réservations</a></li>
                         <li><a class="dropdown-item" routerLink="/home" (click)="logout()" class="btn btn-danger">Déconnexion</a></li>
                     </ul>
                 </li>
