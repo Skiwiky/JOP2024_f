@@ -11,8 +11,8 @@ import { UserDTO } from 'src/app/model/UserDTO';
 })
 export class PanierService {
 
- private apiUrl = 'http://localhost:8080/reservations';
-   /*private apiUrl = '  https://jo2024-7692bdc14032.herokuapp.com/reservations'; */ 
+/* private apiUrl = 'http://localhost:8080/reservations';*/ 
+   private apiUrl = '  https://jo2024-7692bdc14032.herokuapp.com/reservations'; 
 
   constructor(private http: HttpClient,private storageService: StorageService) { }
 

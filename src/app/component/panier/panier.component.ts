@@ -89,7 +89,7 @@ export class PanierComponent {
     );
     this.panierService.createReservation(this.userPaimentDTO).subscribe({
       next: (res) => {
-        alert('Réservation créée avec succès!');
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         alert('Erreur lors de la création de la réservation');

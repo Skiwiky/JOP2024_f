@@ -9,8 +9,8 @@ import { StorageService } from '../storage/storage.service';
 })
 export class BilletService {
 
-  private apiUrl = 'http://localhost:8080/billets/v1'; 
-  /* private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/billets/v1'; */
+ /* private apiUrl = 'http://localhost:8080/billets/v1'; */
+   private apiUrl = 'https://jo2024-7692bdc14032.herokuapp.com/billets/v1'; 
   
 
   constructor(private http: HttpClient, private storageService:StorageService) { }
